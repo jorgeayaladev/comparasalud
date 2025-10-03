@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle de Cita - ComparaSalud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .health-gradient {
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+      }
+
+      .status-confirmed {
+        background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      }
+
+      .status-pending {
+        background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+      }
+
+      .shadow-soft {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <button class="mr-4 text-gray-600 lg:hidden">
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 health-gradient rounded-lg flex items-center justify-center mr-2"
+              >
+                <i class="fas fa-heart text-white text-sm"></i>
+              </div>
+              <span class="text-xl font-bold text-gray-800">ComparaSalud</span>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <button class="text-gray-600 relative">
+              <i class="far fa-bell text-xl"></i>
+              <span
+                class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"
+              ></span>
+            </button>
+            <div class="w-8 h-8 bg-gray-300 rounded-full"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+      <!-- Breadcrumb -->
+      <nav class="flex mb-6 text-sm text-gray-600">
+        <a href="#" class="hover:text-blue-600">Inicio</a>
+        <span class="mx-2">/</span>
+        <a href="#" class="hover:text-blue-600">Mis Citas</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-800 font-medium">Detalle de Cita</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div
+        class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8"
+      >
+        <div>
+          <h1 class="text-2xl lg:text-3xl font-bold text-gray-800 mb-2">
+            Detalle de Cita Médica
+          </h1>
+          <div class="flex items-center">
+            <div
+              class="status-confirmed text-white text-xs font-medium px-3 py-1 rounded-full"
+            >
+              Confirmada
+            </div>
+            <span class="ml-3 text-gray-600">Código: CS-9842-5671</span>
+          </div>
+        </div>
+        <div class="mt-4 lg:mt-0">
+          <button class="text-blue-600 font-medium hover:text-blue-800 mr-4">
+            <i class="far fa-edit mr-1"></i> Editar
+          </button>
+          <button class="text-red-600 font-medium hover:text-red-800">
+            <i class="far fa-trash-alt mr-1"></i> Eliminar
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Columna Principal - Información de la Cita -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- Información del Proveedor -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden fade-in">
+            <div class="health-gradient px-6 py-4 text-white">
+              <h2 class="text-xl font-semibold">Información del Proveedor</h2>
+            </div>
+            <div class="p-6">
+              <div class="flex flex-col md:flex-row md:items-start">
+                <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                  <div
+                    class="w-20 h-20 bg-blue-100 rounded-xl flex items-center justify-center"
+                  >
+                    <i class="fas fa-stethoscope text-blue-600 text-2xl"></i>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold text-gray-800 mb-1">
+                    Clínica Sanitas Moderna
+                  </h3>
+                  <p class="text-gray-600 mb-3">
+                    Cardiología • Dr. Roberto Mendoza
+                  </p>
+
+                  <div class="flex items-center text-gray-600 mb-4">
+                    <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+                    <span>Av. Javier Prado 1234, San Isidro, Lima</span>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <div
+                      class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm"
+                    >
+                      <i class="fas fa-star text-yellow-400 mr-1"></i> 4.8 (124)
+                    </div>
+                    <div
+                      class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm"
+                    >
+                      <i class="fas fa-check-circle mr-1"></i> Verificado
+                    </div>
+                    <div
+                      class="bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-sm"
+                    >
+                      <i class="fas fa-shield-alt mr-1"></i> Asegurado
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detalles de la Cita -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden fade-in">
+            <div class="health-gradient px-6 py-4 text-white">
+              <h2 class="text-xl font-semibold">Detalles de la Cita</h2>
+            </div>
+            <div class="p-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Servicio y Duración -->
+                <div>
+                  <h3
+                    class="font-semibold text-gray-800 mb-3 flex items-center"
+                  >
+                    <i class="fas fa-procedures text-blue-500 mr-2"></i>
+                    Servicio y Duración
+                  </h3>
+                  <div class="space-y-3">
+                    <div>
+                      <p class="text-gray-600 text-sm">Tipo de Consulta</p>
+                      <p class="font-medium">
+                        Consulta Cardiológica Especializada
+                      </p>
+                    </div>
+                    <div>
+                      <p class="text-gray-600 text-sm">Duración Estimada</p>
+                      <p class="font-medium">45 minutos</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-600 text-sm">Sala/Consultorio</p>
+                      <p class="font-medium">Consultorio 304 - Piso 3</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Fecha y Hora -->
+                <div>
+                  <h3
+                    class="font-semibold text-gray-800 mb-3 flex items-center"
+                  >
+                    <i class="far fa-calendar-alt text-green-500 mr-2"></i>
+                    Fecha y Hora
+                  </h3>
+                  <div class="space-y-3">
+                    <div>
+                      <p class="text-gray-600 text-sm">Fecha</p>
+                      <p class="font-medium">Viernes, 15 de Diciembre 2024</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-600 text-sm">Hora</p>
+                      <p class="font-medium">10:30 AM - 11:15 AM</p>
+                    </div>
+                    <div>
+                      <p class="text-gray-600 text-sm">Tiempo Restante</p>
+                      <p class="font-medium text-blue-600">5 días, 3 horas</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Precio y Forma de Pago -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden fade-in">
+            <div class="health-gradient px-6 py-4 text-white">
+              <h2 class="text-xl font-semibold">Precio y Forma de Pago</h2>
+            </div>
+            <div class="p-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 class="font-semibold text-gray-800 mb-3">
+                    Detalles de Pago
+                  </h3>
+                  <div class="space-y-3">
+                    <div class="flex justify-between">
+                      <span class="text-gray-600">Costo de Consulta</span>
+                      <span class="font-medium">S/ 180.00</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-gray-600">Descuento</span>
+                      <span class="font-medium text-green-600">-S/ 20.00</span>
+                    </div>
+                    <div class="flex justify-between border-t pt-2">
+                      <span class="font-semibold">Total a Pagar</span>
+                      <span class="font-bold text-lg">S/ 160.00</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 class="font-semibold text-gray-800 mb-3">
+                    Forma de Pago
+                  </h3>
+                  <div class="space-y-4">
+                    <div class="flex items-center">
+                      <div
+                        class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3"
+                      >
+                        <i class="fas fa-credit-card text-blue-600"></i>
+                      </div>
+                      <div>
+                        <p class="font-medium">Tarjeta de Crédito</p>
+                        <p class="text-sm text-gray-600">Visa •••• 4512</p>
+                      </div>
+                    </div>
+                    <div
+                      class="bg-yellow-50 border border-yellow-200 rounded-lg p-3"
+                    >
+                      <div class="flex items-start">
+                        <i
+                          class="fas fa-exclamation-triangle text-yellow-500 mt-1 mr-2"
+                        ></i>
+                        <div>
+                          <p class="text-sm text-yellow-800 font-medium">
+                            Pago Pendiente
+                          </p>
+                          <p class="text-xs text-yellow-700">
+                            El pago se realizará 24 horas antes de la cita
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Instrucciones Pre-Cita -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden fade-in">
+            <div class="health-gradient px-6 py-4 text-white">
+              <h2 class="text-xl font-semibold">Instrucciones Pre-Cita</h2>
+            </div>
+            <div class="p-6">
+              <div class="prose max-w-none">
+                <ul class="space-y-3">
+                  <li class="flex items-start">
+                    <i
+                      class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"
+                    ></i>
+                    <span
+                      >Llegar 15 minutos antes de la hora programada para
+                      completar el registro</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"
+                    ></i>
+                    <span>Traer documento de identidad original y copia</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"
+                    ></i>
+                    <span
+                      >Traer exámenes médicos previos relacionados (si
+                      aplica)</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"
+                    ></i>
+                    <span
+                      >Jejuno de 8 horas si se programaron exámenes de
+                      sangre</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i
+                      class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"
+                    ></i>
+                    <span
+                      >Usar mascarilla en todas las áreas de la clínica</span
+                    >
+                  </li>
+                </ul>
+
+                <div
+                  class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200"
+                >
+                  <div class="flex items-start">
+                    <i
+                      class="fas fa-info-circle text-blue-500 mt-1 mr-3 flex-shrink-0"
+                    ></i>
+                    <div>
+                      <p class="font-medium text-blue-800">
+                        Información Importante
+                      </p>
+                      <p class="text-sm text-blue-700 mt-1">
+                        La cancelación con menos de 24 horas de anticipación
+                        puede generar cargos adicionales según las políticas del
+                        centro médico.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Lateral - Acciones y Recordatorios -->
+        <div class="space-y-6">
+          <!-- Acciones Disponibles -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden fade-in">
+            <div class="health-gradient px-6 py-4 text-white">
+              <h2 class="text-xl font-semibold">Acciones Disponibles</h2>
+            </div>
+            <div class="p-6">
+              <div class="space-y-4">
+                <!-- Cancelar Cita -->
+                <button
+                  class="w-full flex items-center justify-between p-4 border border-red-200 rounded-lg hover:bg-red-50 transition-colors card-hover"
+                >
+                  <div class="flex items-center">
+                    <div
+                      class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3"
+                    >
+                      <i class="fas fa-times text-red-600"></i>
+                    </div>
+                    <div class="text-left">
+                      <p class="font-medium text-gray-800">Cancelar Cita</p>
+                      <p class="text-sm text-gray-600">
+                        Sin cargos hasta 24h antes
+                      </p>
+                    </div>
+                  </div>
+                  <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+
+                <!-- Reprogramar Cita -->
+                <button
+                  class="w-full flex items-center justify-between p-4 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors card-hover"
+                >
+                  <div class="flex items-center">
+                    <div
+                      class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3"
+                    >
+                      <i class="fas fa-calendar-plus text-blue-600"></i>
+                    </div>
+                    <div class="text-left">
+                      <p class="font-medium text-gray-800">Reprogramar Cita</p>
+                      <p class="text-sm text-gray-600">Ver disponibilidad</p>
+                    </div>
+                  </div>
+                  <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+
+                <!-- Agregar a Calendario -->
+                <button
+                  class="w-full flex items-center justify-between p-4 border border-green-200 rounded-lg hover:bg-green-50 transition-colors card-hover"
+                >
+                  <div class="flex items-center">
+                    <div
+                      class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3"
+                    >
+                      <i class="far fa-calendar-plus text-green-600"></i>
+                    </div>
+                    <div class="text-left">
+                      <p class="font-medium text-gray-800">
+                        Agregar a Calendario
+                      </p>
+                      <p class="text-sm text-gray-600">
+                        Google, Apple, Outlook
+                      </p>
+                    </div>
+                  </div>
+                  <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+
+                <!-- Compartir Detalles -->
+                <button
+                  class="w-full flex items-center justify-between p-4 border border-purple-200 rounded-lg hover:bg-purple-50 transition-colors card-hover"
+                >
+                  <div class="flex items-center">
+                    <div
+                      class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3"
+                    >
+                      <i class="fas fa-share-alt text-purple-600"></i>
+                    </div>
+                    <div class="text-left">
+                      <p class="font-medium text-gray-800">
+                        Compartir Detalles
+                      </p>
+                      <p class="text-sm text-gray-600">WhatsApp, Email, SMS</p>
+                    </div>
+                  </div>
+                  <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+
+                <!-- Navegación al Lugar -->
+                <button
+                  class="w-full flex items-center justify-between p-4 border border-orange-200 rounded-lg hover:bg-orange-50 transition-colors card-hover"
+                >
+                  <div class="flex items-center">
+                    <div
+                      class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-3"
+                    >
+                      <i class="fas fa-map-marked-alt text-orange-600"></i>
+                    </div>
+                    <div class="text-left">
+                      <p class="font-medium text-gray-800">Cómo Llegar</p>
+                      <p class="text-sm text-gray-600">Google Maps, Waze</p>
+                    </div>
+                  </div>
+                  <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recordatorios y Notificaciones -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden fade-in">
+            <div class="health-gradient px-6 py-4 text-white">
+              <h2 class="text-xl font-semibold">Recordatorios</h2>
+            </div>
+            <div class="p-6">
+              <div class="space-y-4">
+                <!-- Estado de Recordatorios -->
+                <div>
+                  <h3 class="font-semibold text-gray-800 mb-3">
+                    Estado de Recordatorios
+                  </h3>
+                  <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center">
+                        <i class="far fa-envelope text-blue-500 mr-2"></i>
+                        <span class="text-sm">Email de Confirmación</span>
+                      </div>
+                      <span class="text-green-600 text-sm font-medium"
+                        >Enviado</span
+                      >
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center">
+                        <i class="fas fa-bell text-orange-500 mr-2"></i>
+                        <span class="text-sm">Recordatorio 48h antes</span>
+                      </div>
+                      <span class="text-gray-500 text-sm">Pendiente</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center">
+                        <i class="fas fa-sms text-green-500 mr-2"></i>
+                        <span class="text-sm">SMS 24h antes</span>
+                      </div>
+                      <span class="text-gray-500 text-sm">Pendiente</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center">
+                        <i class="fas fa-bell text-purple-500 mr-2"></i>
+                        <span class="text-sm">Recordatorio 2h antes</span>
+                      </div>
+                      <span class="text-gray-500 text-sm">Pendiente</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Opciones de Notificación -->
+                <div class="pt-4 border-t">
+                  <h3 class="font-semibold text-gray-800 mb-3">
+                    Opciones de Notificación
+                  </h3>
+                  <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm">Notificaciones Push</span>
+                      <label
+                        class="relative inline-flex items-center cursor-pointer"
+                      >
+                        <input type="checkbox" class="sr-only peer" checked />
+                        <div
+                          class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                        ></div>
+                      </label>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm">Recordatorio por Email</span>
+                      <label
+                        class="relative inline-flex items-center cursor-pointer"
+                      >
+                        <input type="checkbox" class="sr-only peer" checked />
+                        <div
+                          class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                        ></div>
+                      </label>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm">Recordatorio por SMS</span>
+                      <label
+                        class="relative inline-flex items-center cursor-pointer"
+                      >
+                        <input type="checkbox" class="sr-only peer" />
+                        <div
+                          class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                        ></div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Acción Rápida -->
+                <div class="pt-4 border-t">
+                  <button
+                    class="w-full health-gradient text-white font-medium py-3 rounded-lg shadow hover:shadow-md transition-all flex items-center justify-center"
+                  >
+                    <i class="fas fa-bell mr-2"></i>
+                    Probar Recordatorio
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Información de Contacto de Emergencia -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden fade-in">
+            <div class="bg-red-600 px-6 py-4 text-white">
+              <h2 class="text-xl font-semibold">Contacto de Emergencia</h2>
+            </div>
+            <div class="p-6">
+              <div class="text-center">
+                <div
+                  class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3"
+                >
+                  <i class="fas fa-phone-alt text-red-600"></i>
+                </div>
+                <p class="text-sm text-gray-600 mb-2">
+                  En caso de emergencia o cancelación urgente
+                </p>
+                <p class="font-semibold text-lg">(01) 234-5678</p>
+                <button
+                  class="mt-3 text-red-600 font-medium text-sm hover:text-red-800"
+                >
+                  <i class="fas fa-phone mr-1"></i> Llamar Ahora
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-12">
+      <div class="container mx-auto px-4 py-8">
+        <div class="text-center text-gray-600">
+          <p>
+            ¿Necesitas ayuda?
+            <a href="#" class="text-blue-600 hover:underline">Contáctanos</a>
+          </p>
+          <p class="mt-2 text-sm">
+            © 2024 ComparaSalud. Todos los derechos reservados.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Animación de entrada para las tarjetas
+        const cards = document.querySelectorAll(".fade-in");
+        cards.forEach((card, index) => {
+          card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Simulación de interacción con los botones de acción
+        const actionButtons = document.querySelectorAll(".card-hover");
+        actionButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const actionText = this.querySelector(".font-medium").textContent;
+            alert(
+              `Acción: ${actionText}\n\nEsta funcionalidad se implementará en la versión completa de la aplicación.`
+            );
+          });
+        });
+
+        // Toggle para las opciones de notificación
+        const toggles = document.querySelectorAll('input[type="checkbox"]');
+        toggles.forEach((toggle) => {
+          toggle.addEventListener("change", function () {
+            const optionText =
+              this.closest(".flex").querySelector("span").textContent;
+            const status = this.checked ? "activada" : "desactivada";
+            console.log(`Notificación ${optionText} ${status}`);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

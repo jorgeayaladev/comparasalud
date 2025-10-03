@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Reseñas - ComparaSalud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .health-gradient {
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+      }
+
+      .health-gradient-text {
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .star-rating .star {
+        color: #d1d5db;
+      }
+
+      .star-rating .star.active {
+        color: #f59e0b;
+      }
+
+      .review-card {
+        transition: all 0.3s ease;
+      }
+
+      .review-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .tab-active {
+        position: relative;
+      }
+
+      .tab-active::after {
+        content: "";
+        position: absolute;
+        bottom: -12px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <div
+              class="w-10 h-10 health-gradient rounded-lg flex items-center justify-center mr-3"
+            >
+              <div class="w-6 h-6 bg-white rounded-full relative">
+                <div
+                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 health-gradient rounded-full"
+                ></div>
+              </div>
+            </div>
+            <span class="text-xl font-bold text-gray-900">ComparaSalud</span>
+          </div>
+
+          <!-- Navegación -->
+          <nav class="hidden md:flex space-x-8">
+            <a href="#" class="text-gray-500 hover:text-gray-700 font-medium"
+              >Inicio</a
+            >
+            <a href="#" class="text-gray-500 hover:text-gray-700 font-medium"
+              >Búsqueda</a
+            >
+            <a href="#" class="text-gray-500 hover:text-gray-700 font-medium"
+              >Mis Citas</a
+            >
+            <a href="#" class="health-gradient-text font-medium">Mis Reseñas</a>
+            <a href="#" class="text-gray-500 hover:text-gray-700 font-medium"
+              >Perfil</a
+            >
+          </nav>
+
+          <!-- Iconos de usuario -->
+          <div class="flex items-center space-x-4">
+            <button class="text-gray-400 hover:text-gray-600">
+              <i class="fas fa-bell text-xl"></i>
+            </button>
+            <div
+              class="w-8 h-8 health-gradient rounded-full flex items-center justify-center text-white font-semibold"
+            >
+              M
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Header de la página -->
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Mis Reseñas</h1>
+        <p class="text-gray-600">
+          Gestiona y revisa todas tus reseñas y calificaciones
+        </p>
+      </div>
+
+      <!-- Pestañas de navegación -->
+      <div class="border-b border-gray-200 mb-8">
+        <div class="flex space-x-8 overflow-x-auto">
+          <button
+            id="tab-written"
+            class="tab-active py-4 px-1 text-lg font-medium text-gray-900 whitespace-nowrap"
+          >
+            Reseñas Escritas
+            <span
+              class="ml-2 health-gradient px-2 py-1 rounded-full text-xs font-semibold text-white"
+              >12</span
+            >
+          </button>
+          <button
+            id="tab-received"
+            class="py-4 px-1 text-lg font-medium text-gray-500 hover:text-gray-700 whitespace-nowrap"
+          >
+            Calificaciones Recibidas
+            <span
+              class="ml-2 bg-gray-200 px-2 py-1 rounded-full text-xs font-semibold text-gray-700"
+              >3</span
+            >
+          </button>
+        </div>
+      </div>
+
+      <!-- Contenido de Reseñas Escritas -->
+      <div id="written-reviews" class="space-y-6">
+        <!-- Filtros y estadísticas -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+          <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4"
+          >
+            <!-- Estadísticas rápidas -->
+            <div class="flex flex-wrap gap-6">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-gray-900">12</div>
+                <div class="text-sm text-gray-500">Total reseñas</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-green-600">10</div>
+                <div class="text-sm text-gray-500">Publicadas</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-yellow-600">2</div>
+                <div class="text-sm text-gray-500">Pendientes</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-blue-600">24</div>
+                <div class="text-sm text-gray-500">Interacciones</div>
+              </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="flex flex-wrap gap-3">
+              <select
+                class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option>Todas las reseñas</option>
+                <option>Publicadas</option>
+                <option>Pendientes</option>
+              </select>
+              <select
+                class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option>Ordenar por: Más reciente</option>
+                <option>Ordenar por: Más antiguo</option>
+                <option>Ordenar por: Más útil</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista de reseñas -->
+        <div class="space-y-6">
+          <!-- Reseña 1 - Publicada -->
+          <div
+            class="review-card bg-white rounded-xl shadow-sm p-6 border border-gray-100"
+          >
+            <div class="flex flex-col lg:flex-row lg:items-start gap-4">
+              <!-- Información del proveedor -->
+              <div class="flex-1">
+                <div class="flex items-start justify-between mb-4">
+                  <div class="flex items-center space-x-3">
+                    <div
+                      class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center"
+                    >
+                      <i class="fas fa-stethoscope text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-semibold text-gray-900">
+                        Dr. Carlos Rodríguez
+                      </h3>
+                      <p class="text-gray-600 text-sm">
+                        Cardiólogo · Clínica San Lucas
+                      </p>
+                    </div>
+                  </div>
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                  >
+                    Publicada
+                  </span>
+                </div>
+
+                <!-- Calificación -->
+                <div class="flex items-center mb-3">
+                  <div class="star-rating flex mr-2">
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg"></i>
+                  </div>
+                  <span class="text-gray-500 text-sm">Hace 2 días</span>
+                </div>
+
+                <!-- Contenido de la reseña -->
+                <p class="text-gray-700 mb-4">
+                  Excelente atención por parte del Dr. Rodríguez. Explicó todo
+                  con claridad, fue muy paciente con mis preguntas y el
+                  tratamiento recomendado ha dado muy buenos resultados. El
+                  personal de la clínica también fue muy amable.
+                </p>
+
+                <!-- Etiquetas de categorías -->
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span
+                    class="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                  >
+                    Profesionalismo
+                  </span>
+                  <span
+                    class="bg-green-50 text-green-700 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                  >
+                    Claridad
+                  </span>
+                  <span
+                    class="bg-purple-50 text-purple-700 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                  >
+                    Empatía
+                  </span>
+                </div>
+
+                <!-- Interacciones -->
+                <div
+                  class="flex items-center justify-between pt-4 border-t border-gray-100"
+                >
+                  <div
+                    class="flex items-center space-x-4 text-sm text-gray-500"
+                  >
+                    <button
+                      class="flex items-center space-x-1 hover:text-blue-600"
+                    >
+                      <i class="far fa-thumbs-up"></i>
+                      <span>Útil (8)</span>
+                    </button>
+                    <button
+                      class="flex items-center space-x-1 hover:text-blue-600"
+                    >
+                      <i class="far fa-comment"></i>
+                      <span>Respuesta</span>
+                    </button>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <button class="text-gray-400 hover:text-blue-600">
+                      <i class="far fa-edit"></i>
+                    </button>
+                    <button class="text-gray-400 hover:text-red-600">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reseña 2 - Pendiente -->
+          <div
+            class="review-card bg-white rounded-xl shadow-sm p-6 border border-gray-100"
+          >
+            <div class="flex flex-col lg:flex-row lg:items-start gap-4">
+              <!-- Información del proveedor -->
+              <div class="flex-1">
+                <div class="flex items-start justify-between mb-4">
+                  <div class="flex items-center space-x-3">
+                    <div
+                      class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center"
+                    >
+                      <i class="fas fa-flask text-green-600 text-xl"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-semibold text-gray-900">
+                        Laboratorio Biomédico Central
+                      </h3>
+                      <p class="text-gray-600 text-sm">
+                        Análisis Clínicos · Sucursal Norte
+                      </p>
+                    </div>
+                  </div>
+                  <span
+                    class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                  >
+                    Pendiente
+                  </span>
+                </div>
+
+                <!-- Calificación -->
+                <div class="flex items-center mb-3">
+                  <div class="star-rating flex mr-2">
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-gray-300 text-lg mr-1"></i>
+                    <i class="fas fa-star text-gray-300 text-lg"></i>
+                  </div>
+                  <span class="text-gray-500 text-sm">Cita: 15 Nov 2024</span>
+                </div>
+
+                <!-- Contenido de la reseña -->
+                <p class="text-gray-700 mb-4">
+                  El servicio fue rápido y eficiente, pero la espera fue más
+                  larga de lo anunciado. Los resultados llegaron en el tiempo
+                  prometido. El personal fue correcto pero poco comunicativo.
+                </p>
+
+                <!-- Etiquetas de categorías -->
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span
+                    class="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                  >
+                    Rapidez
+                  </span>
+                  <span
+                    class="bg-red-50 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                  >
+                    Tiempo de espera
+                  </span>
+                </div>
+
+                <!-- Acciones para reseña pendiente -->
+                <div
+                  class="flex items-center justify-between pt-4 border-t border-gray-100"
+                >
+                  <div class="text-sm text-gray-500">
+                    Tu reseña será publicada después de la verificación
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <button
+                      class="text-blue-600 hover:text-blue-700 font-medium text-sm"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      class="text-red-600 hover:text-red-700 font-medium text-sm"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reseña 3 - Publicada con respuesta -->
+          <div
+            class="review-card bg-white rounded-xl shadow-sm p-6 border border-gray-100"
+          >
+            <div class="flex flex-col lg:flex-row lg:items-start gap-4">
+              <!-- Información del proveedor -->
+              <div class="flex-1">
+                <div class="flex items-start justify-between mb-4">
+                  <div class="flex items-center space-x-3">
+                    <div
+                      class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center"
+                    >
+                      <i class="fas fa-tooth text-purple-600 text-xl"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-semibold text-gray-900">
+                        Dra. María González
+                      </h3>
+                      <p class="text-gray-600 text-sm">
+                        Odontología Estética · Dental Care
+                      </p>
+                    </div>
+                  </div>
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                  >
+                    Publicada
+                  </span>
+                </div>
+
+                <!-- Calificación -->
+                <div class="flex items-center mb-3">
+                  <div class="star-rating flex mr-2">
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg"></i>
+                  </div>
+                  <span class="text-gray-500 text-sm">Hace 1 semana</span>
+                </div>
+
+                <!-- Contenido de la reseña -->
+                <p class="text-gray-700 mb-4">
+                  Increíble experiencia con la Dra. González. Transformó
+                  completamente mi sonrisa con un tratamiento de blanqueamiento
+                  y carillas. Explicó cada paso del proceso y el resultado
+                  superó mis expectativas. ¡Altamente recomendada!
+                </p>
+
+                <!-- Etiquetas de categorías -->
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span
+                    class="bg-purple-50 text-purple-700 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                  >
+                    Resultados
+                  </span>
+                  <span
+                    class="bg-green-50 text-green-700 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                  >
+                    Profesionalismo
+                  </span>
+                  <span
+                    class="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                  >
+                    Comunicación
+                  </span>
+                </div>
+
+                <!-- Respuesta del proveedor -->
+                <div
+                  class="bg-gray-50 rounded-lg p-4 mb-4 border border-gray-200"
+                >
+                  <div class="flex items-center mb-2">
+                    <div
+                      class="w-6 h-6 health-gradient rounded-full flex items-center justify-center mr-2"
+                    >
+                      <i class="fas fa-reply text-white text-xs"></i>
+                    </div>
+                    <span class="font-semibold text-gray-900"
+                      >Respuesta de Dental Care</span
+                    >
+                  </div>
+                  <p class="text-gray-700 text-sm">
+                    ¡Gracias por tu excelente reseña! Nos alegra mucho saber que
+                    tu experiencia con la Dra. González fue tan positiva.
+                    Trabajamos constantemente para superar las expectativas de
+                    nuestros pacientes. ¡Esperamos verte pronto para tu próximo
+                    control!
+                  </p>
+                  <span class="text-gray-500 text-xs mt-2 block"
+                    >Respondido hace 5 días</span
+                  >
+                </div>
+
+                <!-- Interacciones -->
+                <div
+                  class="flex items-center justify-between pt-4 border-t border-gray-100"
+                >
+                  <div
+                    class="flex items-center space-x-4 text-sm text-gray-500"
+                  >
+                    <button
+                      class="flex items-center space-x-1 hover:text-blue-600"
+                    >
+                      <i class="far fa-thumbs-up"></i>
+                      <span>Útil (15)</span>
+                    </button>
+                    <button class="flex items-center space-x-1 text-blue-600">
+                      <i class="far fa-comment"></i>
+                      <span>Ver conversación</span>
+                    </button>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <button class="text-gray-400 hover:text-blue-600">
+                      <i class="far fa-edit"></i>
+                    </button>
+                    <button class="text-gray-400 hover:text-red-600">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paginación -->
+        <div class="flex justify-center mt-8">
+          <nav class="flex items-center space-x-2">
+            <button
+              class="px-3 py-2 rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-50"
+            >
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button
+              class="px-3 py-2 rounded-lg health-gradient text-white font-medium"
+            >
+              1
+            </button>
+            <button
+              class="px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50"
+            >
+              2
+            </button>
+            <button
+              class="px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50"
+            >
+              3
+            </button>
+            <button
+              class="px-3 py-2 rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-50"
+            >
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Contenido de Calificaciones Recibidas -->
+      <div id="received-ratings" class="hidden space-y-6">
+        <!-- Estadísticas de calificaciones recibidas -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+          <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6"
+          >
+            <!-- Promedio general -->
+            <div class="text-center lg:text-left">
+              <div class="text-4xl font-bold text-gray-900 mb-2">4.8</div>
+              <div
+                class="star-rating flex justify-center lg:justify-start mb-1"
+              >
+                <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
+                <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
+                <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
+                <i class="fas fa-star text-yellow-400 text-xl mr-1"></i>
+                <i class="fas fa-star text-yellow-400 text-xl"></i>
+              </div>
+              <div class="text-gray-600 text-sm">
+                Basado en 3 calificaciones
+              </div>
+            </div>
+
+            <!-- Distribución por estrellas -->
+            <div class="flex-1 max-w-md">
+              <div class="space-y-2">
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-600 w-16">5 estrellas</span>
+                  <div class="flex-1 bg-gray-200 rounded-full h-2 mx-2">
+                    <div
+                      class="health-gradient h-2 rounded-full"
+                      style="width: 80%"
+                    ></div>
+                  </div>
+                  <span class="text-sm text-gray-600 w-8">2</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-600 w-16">4 estrellas</span>
+                  <div class="flex-1 bg-gray-200 rounded-full h-2 mx-2">
+                    <div
+                      class="health-gradient h-2 rounded-full"
+                      style="width: 20%"
+                    ></div>
+                  </div>
+                  <span class="text-sm text-gray-600 w-8">1</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-600 w-16">3 estrellas</span>
+                  <div class="flex-1 bg-gray-200 rounded-full h-2 mx-2">
+                    <div
+                      class="bg-gray-200 h-2 rounded-full"
+                      style="width: 0%"
+                    ></div>
+                  </div>
+                  <span class="text-sm text-gray-600 w-8">0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista de calificaciones recibidas -->
+        <div class="space-y-6">
+          <!-- Calificación 1 -->
+          <div
+            class="review-card bg-white rounded-xl shadow-sm p-6 border border-gray-100"
+          >
+            <div class="flex flex-col lg:flex-row lg:items-start gap-4">
+              <!-- Información del paciente -->
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center space-x-3">
+                    <div
+                      class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center"
+                    >
+                      <span class="font-semibold text-gray-700">A</span>
+                    </div>
+                    <div>
+                      <h3 class="font-semibold text-gray-900">Ana Martínez</h3>
+                      <p class="text-gray-600 text-sm">
+                        Paciente · Consulta de nutrición
+                      </p>
+                    </div>
+                  </div>
+                  <span class="text-gray-500 text-sm">Hace 3 días</span>
+                </div>
+
+                <!-- Calificación -->
+                <div class="flex items-center mb-3">
+                  <div class="star-rating flex mr-2">
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg"></i>
+                  </div>
+                </div>
+
+                <!-- Comentario -->
+                <p class="text-gray-700">
+                  Excelente profesional, muy detallista en sus explicaciones y
+                  el plan nutricional que me diseñó ha sido muy efectivo.
+                  ¡Recomendado 100%!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calificación 2 -->
+          <div
+            class="review-card bg-white rounded-xl shadow-sm p-6 border border-gray-100"
+          >
+            <div class="flex flex-col lg:flex-row lg:items-start gap-4">
+              <!-- Información del paciente -->
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center space-x-3">
+                    <div
+                      class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center"
+                    >
+                      <span class="font-semibold text-gray-700">J</span>
+                    </div>
+                    <div>
+                      <h3 class="font-semibold text-gray-900">Javier López</h3>
+                      <p class="text-gray-600 text-sm">
+                        Paciente · Asesoría deportiva
+                      </p>
+                    </div>
+                  </div>
+                  <span class="text-gray-500 text-sm">Hace 1 semana</span>
+                </div>
+
+                <!-- Calificación -->
+                <div class="flex items-center mb-3">
+                  <div class="star-rating flex mr-2">
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-yellow-400 text-lg mr-1"></i>
+                    <i class="fas fa-star text-gray-300 text-lg"></i>
+                  </div>
+                </div>
+
+                <!-- Comentario -->
+                <p class="text-gray-700">
+                  Buen profesional, sabe mucho del tema. El único detalle es que
+                  a veces tarda en responder los mensajes, pero en general muy
+                  satisfecho con el servicio.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center mb-4 md:mb-0">
+            <div
+              class="w-8 h-8 health-gradient rounded-lg flex items-center justify-center mr-2"
+            >
+              <div class="w-4 h-4 bg-white rounded-full relative">
+                <div
+                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-1 health-gradient rounded-full"
+                ></div>
+              </div>
+            </div>
+            <span class="font-bold text-gray-900">ComparaSalud</span>
+          </div>
+          <div class="text-gray-600 text-sm">
+            &copy; 2024 ComparaSalud. Todos los derechos reservados.
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Elementos del DOM
+        const tabWritten = document.getElementById("tab-written");
+        const tabReceived = document.getElementById("tab-received");
+        const writtenReviews = document.getElementById("written-reviews");
+        const receivedRatings = document.getElementById("received-ratings");
+
+        // Cambiar entre pestañas
+        tabWritten.addEventListener("click", function () {
+          tabWritten.classList.add("tab-active", "text-gray-900");
+          tabWritten.classList.remove("text-gray-500");
+          tabReceived.classList.remove("tab-active", "text-gray-900");
+          tabReceived.classList.add("text-gray-500");
+
+          writtenReviews.classList.remove("hidden");
+          receivedRatings.classList.add("hidden");
+        });
+
+        tabReceived.addEventListener("click", function () {
+          tabReceived.classList.add("tab-active", "text-gray-900");
+          tabReceived.classList.remove("text-gray-500");
+          tabWritten.classList.remove("tab-active", "text-gray-900");
+          tabWritten.classList.add("text-gray-500");
+
+          receivedRatings.classList.remove("hidden");
+          writtenReviews.classList.add("hidden");
+        });
+
+        // Efectos hover para las cards
+        const reviewCards = document.querySelectorAll(".review-card");
+        reviewCards.forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.transform = "translateY(-2px)";
+            this.style.boxShadow =
+              "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)";
+          });
+
+          card.addEventListener("mouseleave", function () {
+            this.style.transform = "translateY(0)";
+            this.style.boxShadow = "";
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

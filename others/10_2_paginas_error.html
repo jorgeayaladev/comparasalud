@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ComparaSalud - Centro de Ayuda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .health-gradient {
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+      }
+
+      .error-pulse {
+        animation: error-pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes error-pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+
+      .floating {
+        animation: floating 3s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Header de Navegación -->
+    <header class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <div
+              class="w-10 h-10 health-gradient rounded-lg flex items-center justify-center mr-3"
+            >
+              <div class="w-6 h-6 bg-white rounded-full relative">
+                <div
+                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 health-gradient rounded-full"
+                ></div>
+              </div>
+            </div>
+            <span class="text-xl font-bold text-gray-800">ComparaSalud</span>
+          </div>
+
+          <!-- Navegación -->
+          <nav class="hidden md:flex space-x-8">
+            <a
+              href="#"
+              class="text-gray-600 hover:text-[#2563EB] transition-colors"
+              >Inicio</a
+            >
+            <a
+              href="#"
+              class="text-gray-600 hover:text-[#2563EB] transition-colors"
+              >Buscar</a
+            >
+            <a
+              href="#"
+              class="text-gray-600 hover:text-[#2563EB] transition-colors"
+              >Mis Citas</a
+            >
+            <a
+              href="#"
+              class="text-gray-600 hover:text-[#2563EB] transition-colors"
+              >Ayuda</a
+            >
+          </nav>
+
+          <!-- Botones de acción -->
+          <div class="flex items-center space-x-4">
+            <button
+              class="text-gray-600 hover:text-[#2563EB] transition-colors"
+            >
+              <i class="fas fa-search text-lg"></i>
+            </button>
+            <button
+              class="health-gradient text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-md transition-shadow"
+            >
+              Iniciar Sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenedor Principal de Páginas de Error -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Header de la sección -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Centro de Ayuda</h1>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+          Si encuentras algún problema técnico, aquí encontrarás soluciones y
+          alternativas
+        </p>
+      </div>
+
+      <!-- Navegación entre errores -->
+      <div class="flex overflow-x-auto pb-4 mb-8 hide-scrollbar">
+        <div class="flex space-x-2 mx-auto">
+          <a
+            href="#connection-error"
+            class="bg-white px-6 py-3 rounded-lg shadow-sm border border-gray-200 hover:border-[#2563EB] transition-colors whitespace-nowrap"
+          >
+            Error de Conexión
+          </a>
+          <a
+            href="#not-found"
+            class="bg-white px-6 py-3 rounded-lg shadow-sm border border-gray-200 hover:border-[#2563EB] transition-colors whitespace-nowrap"
+          >
+            Página No Encontrada
+          </a>
+          <a
+            href="#server-error"
+            class="bg-white px-6 py-3 rounded-lg shadow-sm border border-gray-200 hover:border-[#2563EB] transition-colors whitespace-nowrap"
+          >
+            Error del Servidor
+          </a>
+          <a
+            href="#unauthorized"
+            class="bg-white px-6 py-3 rounded-lg shadow-sm border border-gray-200 hover:border-[#2563EB] transition-colors whitespace-nowrap"
+          >
+            Acceso No Autorizado
+          </a>
+        </div>
+      </div>
+
+      <!-- Error de Conexión -->
+      <div
+        id="connection-error"
+        class="bg-white rounded-2xl shadow-lg overflow-hidden mb-12"
+      >
+        <div class="md:flex">
+          <!-- Ilustración -->
+          <div
+            class="md:w-2/5 bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center p-8"
+          >
+            <div class="relative w-64 h-64">
+              <div
+                class="absolute inset-0 bg-white rounded-full shadow-lg flex items-center justify-center floating"
+              >
+                <i class="fas fa-wifi text-6xl text-gray-400 error-pulse"></i>
+              </div>
+              <div
+                class="absolute -top-4 -right-4 w-20 h-20 bg-red-100 rounded-full flex items-center justify-center"
+              >
+                <i
+                  class="fas fa-exclamation-triangle text-2xl text-red-500"
+                ></i>
+              </div>
+              <div
+                class="absolute -bottom-4 -left-4 w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-sync-alt text-xl text-yellow-500"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenido -->
+          <div class="md:w-3/5 p-8">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4"
+              >
+                <i class="fas fa-wifi text-red-500 text-xl"></i>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-800">
+                  Error de Conexión
+                </h2>
+                <p class="text-gray-600">
+                  Problemas de conectividad a internet
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-4 mb-8">
+              <p class="text-gray-700">
+                Parece que hay problemas con tu conexión a internet. Esto puede
+                afectar la funcionalidad de la aplicación.
+              </p>
+
+              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-circle text-yellow-400"></i>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm text-yellow-700">
+                      <strong>Importante:</strong> Algunas funciones requieren
+                      conexión a internet para funcionar correctamente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                  <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                  Qué puedes hacer:
+                </h3>
+                <ul class="text-sm text-gray-600 space-y-1">
+                  <li>• Verifica tu conexión Wi-Fi o datos móviles</li>
+                  <li>• Reinicia tu router/módem</li>
+                  <li>• Activa y desactiva el modo avión</li>
+                  <li>• Intenta acceder a otras páginas web</li>
+                </ul>
+              </div>
+
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
+                  <i class="fas fa-mobile-alt text-blue-500 mr-2"></i>
+                  Funciones disponibles sin conexión:
+                </h3>
+                <ul class="text-sm text-gray-600 space-y-1">
+                  <li>• Ver citas programadas</li>
+                  <li>• Consultar información guardada</li>
+                  <li>• Contactos de emergencia</li>
+                  <li>• Historial médico local</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <button
+                class="health-gradient text-white px-6 py-3 rounded-lg font-medium hover:shadow-md transition-shadow flex items-center"
+              >
+                <i class="fas fa-redo-alt mr-2"></i>
+                Reintentar Conexión
+              </button>
+              <button
+                class="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors flex items-center"
+              >
+                <i class="fas fa-question-circle mr-2"></i>
+                Más Ayuda
+              </button>
+              <button
+                class="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors flex items-center"
+              >
+                <i class="fas fa-phone-alt mr-2"></i>
+                Soporte Técnico
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Página No Encontrada (404) -->
+      <div
+        id="not-found"
+        class="bg-white rounded-2xl shadow-lg overflow-hidden mb-12"
+      >
+        <div class="md:flex flex-row-reverse">
+          <!-- Ilustración -->
+          <div
+            class="md:w-2/5 bg-gradient-to-br from-purple-50 to-pink-50 flex items-center justify-center p-8"
+          >
+            <div class="relative w-64 h-64">
+              <div
+                class="absolute inset-0 bg-white rounded-full shadow-lg flex items-center justify-center floating"
+              >
+                <div class="text-center">
+                  <div class="text-6xl font-bold text-gray-400">404</div>
+                  <div class="text-lg text-gray-500 mt-2">No encontrado</div>
+                </div>
+              </div>
+              <div
+                class="absolute -top-4 -left-4 w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-search text-purple-500 text-xl"></i>
+              </div>
+              <div
+                class="absolute -bottom-4 -right-4 w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-home text-pink-500 text-2xl"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenido -->
+          <div class="md:w-3/5 p-8">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4"
+              >
+                <i class="fas fa-map-signs text-purple-500 text-xl"></i>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-800">
+                  Página No Encontrada
+                </h2>
+                <p class="text-gray-600">
+                  Error 404 - La página que buscas no existe
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-4 mb-8">
+              <p class="text-gray-700">
+                La página que intentas acceder no existe o ha sido movida a otra
+                ubicación. Esto puede deberse a:
+              </p>
+
+              <div class="bg-blue-50 border-l-4 border-blue-400 p-4">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <i class="fas fa-info-circle text-blue-400"></i>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm text-blue-700">
+                      <strong>Sugerencia:</strong> Verifica que la URL sea
+                      correcta o utiliza el buscador para encontrar lo que
+                      necesitas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-semibold text-gray-800 mb-3">Posibles causas:</h3>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="flex items-start">
+                  <i class="fas fa-link text-gray-400 mt-1 mr-3"></i>
+                  <div>
+                    <h4 class="font-medium text-gray-700">URL incorrecta</h4>
+                    <p class="text-sm text-gray-600">
+                      Verifica que la dirección web esté escrita correctamente
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <i class="fas fa-history text-gray-400 mt-1 mr-3"></i>
+                  <div>
+                    <h4 class="font-medium text-gray-700">
+                      Enlace desactualizado
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      La página puede haber sido movida o eliminada
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <i class="fas fa-ban text-gray-400 mt-1 mr-3"></i>
+                  <div>
+                    <h4 class="font-medium text-gray-700">
+                      Acceso restringido
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Es posible que necesites permisos especiales
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <i class="fas fa-cog text-gray-400 mt-1 mr-3"></i>
+                  <div>
+                    <h4 class="font-medium text-gray-700">Error temporal</h4>
+                    <p class="text-sm text-gray-600">
+                      Intenta recargar la página en unos minutos
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <button
+                onclick="window.location.href='/'"
+                class="health-gradient text-white px-6 py-3 rounded-lg font-medium hover:shadow-md transition-shadow flex items-center"
+              >
+                <i class="fas fa-home mr-2"></i>
+                Ir al Inicio
+              </button>
+              <button
+                onclick="window.history.back()"
+                class="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors flex items-center"
+              >
+                <i class="fas fa-arrow-left mr-2"></i>
+                Volver Atrás
+              </button>
+              <button
+                class="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors flex items-center"
+              >
+                <i class="fas fa-search mr-2"></i>
+                Buscar en el Sitio
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error del Servidor (500) -->
+      <div
+        id="server-error"
+        class="bg-white rounded-2xl shadow-lg overflow-hidden mb-12"
+      >
+        <div class="md:flex">
+          <!-- Ilustración -->
+          <div
+            class="md:w-2/5 bg-gradient-to-br from-orange-50 to-red-50 flex items-center justify-center p-8"
+          >
+            <div class="relative w-64 h-64">
+              <div
+                class="absolute inset-0 bg-white rounded-full shadow-lg flex items-center justify-center floating"
+              >
+                <i class="fas fa-server text-6xl text-gray-400 error-pulse"></i>
+              </div>
+              <div
+                class="absolute -top-4 -right-4 w-20 h-20 bg-red-100 rounded-full flex items-center justify-center"
+              >
+                <div class="text-red-500 font-bold text-lg">500</div>
+              </div>
+              <div
+                class="absolute -bottom-4 -left-4 w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-tools text-orange-500 text-xl"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenido -->
+          <div class="md:w-3/5 p-8">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4"
+              >
+                <i class="fas fa-exclamation-triangle text-red-500 text-xl"></i>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-800">
+                  Error del Servidor
+                </h2>
+                <p class="text-gray-600">
+                  Error 500 - Problemas internos del sistema
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-4 mb-8">
+              <p class="text-gray-700">
+                Estamos experimentando dificultades técnicas en nuestros
+                servidores. Nuestro equipo técnico ha sido notificado y está
+                trabajando en la solución.
+              </p>
+
+              <div class="bg-red-50 border-l-4 border-red-400 p-4">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-triangle text-red-400"></i>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm text-red-700">
+                      <strong>Atención:</strong> Este error es temporal y no
+                      afecta la seguridad de tus datos.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-semibold text-gray-800 mb-3">
+                Estado del servicio:
+              </h3>
+              <div class="grid md:grid-cols-3 gap-4 text-center">
+                <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+                  <i
+                    class="fas fa-check-circle text-green-500 text-2xl mb-2"
+                  ></i>
+                  <h4 class="font-medium text-green-700">Aplicación</h4>
+                  <p class="text-sm text-green-600">Operativa</p>
+                </div>
+                <div class="bg-red-50 rounded-lg p-4 border border-red-200">
+                  <i
+                    class="fas fa-exclamation-circle text-red-500 text-2xl mb-2"
+                  ></i>
+                  <h4 class="font-medium text-red-700">Base de Datos</h4>
+                  <p class="text-sm text-red-600">En mantenimiento</p>
+                </div>
+                <div
+                  class="bg-yellow-50 rounded-lg p-4 border border-yellow-200"
+                >
+                  <i class="fas fa-sync-alt text-yellow-500 text-2xl mb-2"></i>
+                  <h4 class="font-medium text-yellow-700">API</h4>
+                  <p class="text-sm text-yellow-600">Inestable</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+              <h4 class="font-semibold text-gray-800 mb-2 flex items-center">
+                <i class="fas fa-clock text-gray-500 mr-2"></i>
+                Tiempo estimado de solución:
+              </h4>
+              <div class="flex items-center text-gray-700">
+                <div
+                  class="w-3 h-3 bg-yellow-400 rounded-full mr-2 animate-pulse"
+                ></div>
+                <span
+                  >Estamos trabajando para resolverlo en los próximos 30
+                  minutos</span
+                >
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <button
+                class="health-gradient text-white px-6 py-3 rounded-lg font-medium hover:shadow-md transition-shadow flex items-center"
+              >
+                <i class="fas fa-redo-alt mr-2"></i>
+                Reintentar
+              </button>
+              <button
+                class="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors flex items-center"
+              >
+                <i class="fas fa-history mr-2"></i>
+                Ver Historial de Estado
+              </button>
+              <button
+                class="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors flex items-center"
+              >
+                <i class="fab fa-twitter mr-2"></i>
+                Seguir Actualizaciones
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acceso No Autorizado -->
+      <div
+        id="unauthorized"
+        class="bg-white rounded-2xl shadow-lg overflow-hidden"
+      >
+        <div class="md:flex flex-row-reverse">
+          <!-- Ilustración -->
+          <div
+            class="md:w-2/5 bg-gradient-to-br from-indigo-50 to-blue-50 flex items-center justify-center p-8"
+          >
+            <div class="relative w-64 h-64">
+              <div
+                class="absolute inset-0 bg-white rounded-full shadow-lg flex items-center justify-center floating"
+              >
+                <i class="fas fa-lock text-6xl text-gray-400"></i>
+              </div>
+              <div
+                class="absolute -top-4 -left-4 w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-user-shield text-indigo-500 text-xl"></i>
+              </div>
+              <div
+                class="absolute -bottom-4 -right-4 w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-key text-blue-500 text-2xl"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenido -->
+          <div class="md:w-3/5 p-8">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4"
+              >
+                <i class="fas fa-ban text-indigo-500 text-xl"></i>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-800">
+                  Acceso No Autorizado
+                </h2>
+                <p class="text-gray-600">
+                  Error 403 - No tienes permisos para acceder a este recurso
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-4 mb-8">
+              <p class="text-gray-700">
+                No tienes los permisos necesarios para acceder a esta página o
+                recurso. Esto puede deberse a:
+              </p>
+
+              <div class="bg-indigo-50 border-l-4 border-indigo-400 p-4">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <i class="fas fa-info-circle text-indigo-400"></i>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm text-indigo-700">
+                      <strong>Información:</strong> Algunas secciones requieren
+                      autenticación o permisos específicos.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-semibold text-gray-800 mb-3">
+                Solución del problema:
+              </h3>
+              <div class="space-y-3">
+                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                  <div
+                    class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <span class="text-blue-600 font-bold">1</span>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-700">
+                      Inicia sesión en tu cuenta
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Accede con tus credenciales para verificar tus permisos
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                  <div
+                    class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <span class="text-green-600 font-bold">2</span>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-700">
+                      Verifica tu suscripción
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Algunas funciones requieren una suscripción activa
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                  <div
+                    class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <span class="text-purple-600 font-bold">3</span>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-700">
+                      Contacta al administrador
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      Si crees que deberías tener acceso, solicita permisos
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <button
+                onclick="window.location.href='/login'"
+                class="health-gradient text-white px-6 py-3 rounded-lg font-medium hover:shadow-md transition-shadow flex items-center"
+              >
+                <i class="fas fa-sign-in-alt mr-2"></i>
+                Iniciar Sesión
+              </button>
+              <button
+                onclick="window.location.href='/register'"
+                class="bg-white border border-[#2563EB] text-[#2563EB] px-6 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors flex items-center"
+              >
+                <i class="fas fa-user-plus mr-2"></i>
+                Crear Cuenta
+              </button>
+              <button
+                class="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors flex items-center"
+              >
+                <i class="fas fa-envelope mr-2"></i>
+                Solicitar Acceso
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center mb-4">
+              <div
+                class="w-8 h-8 health-gradient rounded-lg flex items-center justify-center mr-2"
+              >
+                <div class="w-4 h-4 bg-white rounded-full relative">
+                  <div
+                    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-1 health-gradient rounded-full"
+                  ></div>
+                </div>
+              </div>
+              <span class="text-xl font-bold">ComparaSalud</span>
+            </div>
+            <p class="text-gray-400 text-sm">
+              Democratizando el acceso a la salud mediante transparencia y
+              tecnología.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="font-semibold mb-4">Enlaces Rápidos</h3>
+            <ul class="space-y-2 text-gray-400">
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Inicio</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Buscar Proveedores</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Centro de Ayuda</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Estado del Sistema</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-semibold mb-4">Legal</h3>
+            <ul class="space-y-2 text-gray-400">
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Términos de Servicio</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Política de Privacidad</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Cookies</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-semibold mb-4">Contacto</h3>
+            <ul class="space-y-2 text-gray-400">
+              <li class="flex items-center">
+                <i class="fas fa-envelope mr-2"></i>
+                soporte@comparasalud.com
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone mr-2"></i>
+                +1 (555) 123-4567
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm"
+        >
+          <p>&copy; 2024 ComparaSalud. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scroll para los enlaces de navegación
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Simular funcionalidad de los botones
+      document.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", function () {
+          if (!this.getAttribute("onclick")) {
+            // Simular acción para botones sin funcionalidad específica
+            this.classList.add("opacity-75");
+            setTimeout(() => {
+              this.classList.remove("opacity-75");
+            }, 300);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
