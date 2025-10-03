@@ -1,0 +1,1 @@
+git config --global alias.deploy '!git add . && git commit -m "Deploy" && git push'

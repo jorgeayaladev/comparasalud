@@ -1,3 +1,5 @@
+let logoURL = "https://gms.gumtree.co.za/v2/images/za_ads_133423581_250901_68b59f9b58d269000a3d2284?size=l";
+
 let socialNetworks = [
   {
     name: "Facebook",
@@ -81,7 +83,7 @@ let footer = `
       <!-- Columna 1: Logo y descripción -->
       <div>
         <div class="flex items-center space-x-3 mb-4">
-          <img src="../assets/img/logo.png" alt="ComparaSalud" class="w-10 h-10" />
+          <img src="${logoURL}" alt="ComparaSalud" class="w-10 h-10 rounded-full object-cover" />
           <span class="text-xl font-bold">ComparaSalud</span>
         </div>
         <p class="text-gray-400 mb-4">
