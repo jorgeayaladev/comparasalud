@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Centro de Ayuda - ComparaSalud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .health-gradient {
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+      }
+
+      .health-gradient-text {
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .faq-item {
+        transition: all 0.3s ease;
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 500px;
+      }
+
+      .guide-step {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease;
+      }
+
+      .guide-step.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .smooth-hover {
+        transition: all 0.3s ease;
+      }
+
+      .smooth-hover:hover {
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Header de Navegación -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 health-gradient rounded-lg flex items-center justify-center"
+            >
+              <div class="w-6 h-6 bg-white rounded-full relative">
+                <div
+                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 health-gradient rounded-full"
+                ></div>
+              </div>
+            </div>
+            <span class="text-xl font-bold text-gray-800">ComparaSalud</span>
+          </div>
+
+          <!-- Menú de navegación -->
+          <nav class="hidden md:flex items-center space-x-8">
+            <a href="#" class="text-gray-600 hover:text-[#2563EB] font-medium"
+              >Inicio</a
+            >
+            <a href="#" class="text-gray-600 hover:text-[#2563EB] font-medium"
+              >Buscar</a
+            >
+            <a href="#" class="text-gray-600 hover:text-[#2563EB] font-medium"
+              >Mis Citas</a
+            >
+            <a
+              href="#"
+              class="text-[#2563EB] font-medium border-b-2 border-[#2563EB] pb-1"
+              >Ayuda</a
+            >
+            <a href="#" class="text-gray-600 hover:text-[#2563EB] font-medium"
+              >Perfil</a
+            >
+          </nav>
+
+          <!-- Botón menú móvil -->
+          <button class="md:hidden text-gray-600">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="container mx-auto px-4 py-8">
+      <!-- Header del Centro de Ayuda -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          Centro de Ayuda
+        </h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Estamos aquí para ayudarte. Encuentra respuestas a tus preguntas o
+          contacta con nuestro equipo de soporte.
+        </p>
+      </div>
+
+      <!-- Barra de Búsqueda -->
+      <div class="max-w-2xl mx-auto mb-12">
+        <div class="relative">
+          <input
+            type="text"
+            placeholder="Buscar en preguntas frecuentes..."
+            class="w-full px-6 py-4 pl-14 bg-white rounded-2xl border border-gray-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent text-lg"
+          />
+          <div
+            class="absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400"
+          >
+            <i class="fas fa-search text-xl"></i>
+          </div>
+          <button
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 health-gradient text-white px-6 py-2 rounded-lg font-medium"
+          >
+            Buscar
+          </button>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Columna Izquierda - Navegación -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-2xl shadow-sm p-6 sticky top-24">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">
+              Categorías de Ayuda
+            </h2>
+            <nav class="space-y-2">
+              <button
+                class="category-btn w-full text-left px-4 py-3 rounded-lg bg-[#2563EB] text-white font-medium flex items-center justify-between"
+              >
+                <span>Preguntas Frecuentes</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <button
+                class="category-btn w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 font-medium flex items-center justify-between"
+              >
+                <span>Guías de Uso</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <button
+                class="category-btn w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 font-medium flex items-center justify-between"
+              >
+                <span>Contactar Soporte</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <button
+                class="category-btn w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 font-medium flex items-center justify-between"
+              >
+                <span>Políticas y Términos</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <button
+                class="category-btn w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 font-medium flex items-center justify-between"
+              >
+                <span>Solución de Problemas</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </nav>
+
+            <!-- Contacto Rápido -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+              <h3 class="font-bold text-gray-800 mb-4">
+                ¿Necesitas ayuda inmediata?
+              </h3>
+              <div class="space-y-3">
+                <a
+                  href="#"
+                  class="flex items-center space-x-3 text-gray-700 hover:text-[#2563EB] p-2 rounded-lg hover:bg-gray-50"
+                >
+                  <div
+                    class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="fas fa-comments text-green-600"></i>
+                  </div>
+                  <span>Chat en Vivo</span>
+                </a>
+                <a
+                  href="#"
+                  class="flex items-center space-x-3 text-gray-700 hover:text-[#2563EB] p-2 rounded-lg hover:bg-gray-50"
+                >
+                  <div
+                    class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="fas fa-phone-alt text-blue-600"></i>
+                  </div>
+                  <span>Llamar por Teléfono</span>
+                </a>
+                <a
+                  href="#"
+                  class="flex items-center space-x-3 text-gray-700 hover:text-[#2563EB] p-2 rounded-lg hover:bg-gray-50"
+                >
+                  <div
+                    class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="fas fa-envelope text-purple-600"></i>
+                  </div>
+                  <span>Enviar Email</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha - Contenido -->
+        <div class="lg:col-span-2">
+          <!-- Sección: Preguntas Frecuentes -->
+          <section
+            id="faq-section"
+            class="bg-white rounded-2xl shadow-sm p-6 mb-8"
+          >
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-2xl font-bold text-gray-800">
+                Preguntas Frecuentes
+              </h2>
+              <div class="flex items-center space-x-2 text-sm text-gray-600">
+                <i class="fas fa-info-circle"></i>
+                <span>45 preguntas frecuentes</span>
+              </div>
+            </div>
+
+            <!-- Categorías de FAQ -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              <button
+                class="faq-category px-4 py-2 bg-[#2563EB] text-white rounded-full text-sm font-medium"
+              >
+                Todas
+              </button>
+              <button
+                class="faq-category px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-300"
+              >
+                Cuenta y Perfil
+              </button>
+              <button
+                class="faq-category px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-300"
+              >
+                Citas y Agendamiento
+              </button>
+              <button
+                class="faq-category px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-300"
+              >
+                Pagos y Facturación
+              </button>
+              <button
+                class="faq-category px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-300"
+              >
+                Problemas Técnicos
+              </button>
+            </div>
+
+            <!-- Lista de Preguntas Frecuentes -->
+            <div class="space-y-4">
+              <!-- FAQ Item 1 -->
+              <div class="faq-item bg-gray-50 rounded-xl p-5 smooth-hover">
+                <button
+                  class="faq-question w-full text-left flex items-center justify-between"
+                >
+                  <span class="text-lg font-semibold text-gray-800"
+                    >¿Cómo creo una cuenta en ComparaSalud?</span
+                  >
+                  <i
+                    class="fas fa-chevron-down text-[#2563EB] transform transition-transform"
+                  ></i>
+                </button>
+                <div class="faq-answer mt-3">
+                  <p class="text-gray-600 mb-3">
+                    Crear una cuenta en ComparaSalud es muy sencillo. Solo sigue
+                    estos pasos:
+                  </p>
+                  <ol
+                    class="list-decimal list-inside space-y-2 text-gray-600 ml-4"
+                  >
+                    <li>
+                      Haz clic en el botón "Registrarse" en la esquina superior
+                      derecha
+                    </li>
+                    <li>
+                      Ingresa tu correo electrónico y crea una contraseña segura
+                    </li>
+                    <li>
+                      Verifica tu correo electrónico mediante el enlace que te
+                      enviaremos
+                    </li>
+                    <li>Completa tu perfil con información básica</li>
+                    <li>¡Listo! Ya puedes comenzar a usar ComparaSalud</li>
+                  </ol>
+                </div>
+              </div>
+
+              <!-- FAQ Item 2 -->
+              <div class="faq-item bg-gray-50 rounded-xl p-5 smooth-hover">
+                <button
+                  class="faq-question w-full text-left flex items-center justify-between"
+                >
+                  <span class="text-lg font-semibold text-gray-800"
+                    >¿Cómo puedo agendar una cita médica?</span
+                  >
+                  <i
+                    class="fas fa-chevron-down text-[#2563EB] transform transition-transform"
+                  ></i>
+                </button>
+                <div class="faq-answer mt-3">
+                  <p class="text-gray-600">
+                    Para agendar una cita médica, utiliza nuestra función de
+                    búsqueda para encontrar proveedores de salud cerca de ti.
+                    Puedes filtrar por especialidad, precio, calificaciones y
+                    disponibilidad. Una vez que encuentres un proveedor,
+                    selecciona el servicio que necesitas, elige una fecha y hora
+                    disponible, y confirma tu cita. Recibirás una confirmación
+                    inmediata por email y notificación push.
+                  </p>
+                </div>
+              </div>
+
+              <!-- FAQ Item 3 -->
+              <div class="faq-item bg-gray-50 rounded-xl p-5 smooth-hover">
+                <button
+                  class="faq-question w-full text-left flex items-center justify-between"
+                >
+                  <span class="text-lg font-semibold text-gray-800"
+                    >¿Qué métodos de pago aceptan?</span
+                  >
+                  <i
+                    class="fas fa-chevron-down text-[#2563EB] transform transition-transform"
+                  ></i>
+                </button>
+                <div class="faq-answer mt-3">
+                  <p class="text-gray-600 mb-3">
+                    Aceptamos una variedad de métodos de pago para tu
+                    conveniencia:
+                  </p>
+                  <ul
+                    class="list-disc list-inside space-y-2 text-gray-600 ml-4"
+                  >
+                    <li>
+                      Tarjetas de crédito y débito (Visa, MasterCard, American
+                      Express)
+                    </li>
+                    <li>Transferencias bancarias</li>
+                    <li>Pago en efectivo en el establecimiento</li>
+                    <li>
+                      Pago mediante aplicaciones móviles (Yape, Plin, etc.)
+                    </li>
+                    <li>Seguros médicos (dependiendo del proveedor)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- FAQ Item 4 -->
+              <div class="faq-item bg-gray-50 rounded-xl p-5 smooth-hover">
+                <button
+                  class="faq-question w-full text-left flex items-center justify-between"
+                >
+                  <span class="text-lg font-semibold text-gray-800"
+                    >¿Cómo cancelo o reprogramo una cita?</span
+                  >
+                  <i
+                    class="fas fa-chevron-down text-[#2563EB] transform transition-transform"
+                  ></i>
+                </button>
+                <div class="faq-answer mt-3">
+                  <p class="text-gray-600">
+                    Puedes cancelar o reprogramar una cita desde la sección "Mis
+                    Citas" en tu perfil. Selecciona la cita que deseas modificar
+                    y elige la opción correspondiente. Ten en cuenta que algunas
+                    citas pueden tener políticas de cancelación específicas. Te
+                    recomendamos cancelar con al menos 24 horas de anticipación
+                    para evitar cargos.
+                  </p>
+                </div>
+              </div>
+
+              <!-- FAQ Item 5 -->
+              <div class="faq-item bg-gray-50 rounded-xl p-5 smooth-hover">
+                <button
+                  class="faq-question w-full text-left flex items-center justify-between"
+                >
+                  <span class="text-lg font-semibold text-gray-800"
+                    >¿Cómo funcionan las calificaciones y reseñas?</span
+                  >
+                  <i
+                    class="fas fa-chevron-down text-[#2563EB] transform transition-transform"
+                  ></i>
+                </button>
+                <div class="faq-answer mt-3">
+                  <p class="text-gray-600">
+                    Después de cada cita médica, podrás calificar y dejar una
+                    reseña sobre tu experiencia. Las calificaciones se basan en
+                    una escala de 1 a 5 estrellas y puedes evaluar aspectos como
+                    profesionalismo, limpieza, tiempo de espera y claridad en
+                    costos. Tus reseñas ayudan a otros usuarios a tomar
+                    decisiones informadas. Solo los usuarios que han tenido una
+                    cita confirmada pueden dejar reseñas para garantizar su
+                    autenticidad.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ver más FAQs -->
+            <div class="text-center mt-6">
+              <button
+                class="health-gradient text-white px-8 py-3 rounded-lg font-medium shadow hover:shadow-md transition-all"
+              >
+                Ver Todas las Preguntas Frecuentes
+              </button>
+            </div>
+          </section>
+
+          <!-- Sección: Guías de Uso -->
+          <section
+            id="guides-section"
+            class="bg-white rounded-2xl shadow-sm p-6 mb-8 hidden"
+          >
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">
+              Guías de Uso Paso a Paso
+            </h2>
+
+            <!-- Navegación de Guías -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <button
+                class="guide-nav bg-gray-100 rounded-xl p-4 text-left hover:bg-gray-200 transition-colors"
+              >
+                <div class="flex items-center space-x-3">
+                  <div
+                    class="w-12 h-12 health-gradient rounded-lg flex items-center justify-center"
+                  >
+                    <i class="fas fa-user-plus text-white"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-800">Primeros Pasos</h3>
+                    <p class="text-sm text-gray-600">
+                      Configura tu cuenta y perfil
+                    </p>
+                  </div>
+                </div>
+              </button>
+              <button
+                class="guide-nav bg-gray-100 rounded-xl p-4 text-left hover:bg-gray-200 transition-colors"
+              >
+                <div class="flex items-center space-x-3">
+                  <div
+                    class="w-12 h-12 health-gradient rounded-lg flex items-center justify-center"
+                  >
+                    <i class="fas fa-search text-white"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-800">
+                      Búsqueda Avanzada
+                    </h3>
+                    <p class="text-sm text-gray-600">
+                      Encuentra proveedores ideales
+                    </p>
+                  </div>
+                </div>
+              </button>
+              <button
+                class="guide-nav bg-gray-100 rounded-xl p-4 text-left hover:bg-gray-200 transition-colors"
+              >
+                <div class="flex items-center space-x-3">
+                  <div
+                    class="w-12 h-12 health-gradient rounded-lg flex items-center justify-center"
+                  >
+                    <i class="far fa-calendar-check text-white"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-800">
+                      Gestión de Citas
+                    </h3>
+                    <p class="text-sm text-gray-600">
+                      Agenda y administra tus citas
+                    </p>
+                  </div>
+                </div>
+              </button>
+              <button
+                class="guide-nav bg-gray-100 rounded-xl p-4 text-left hover:bg-gray-200 transition-colors"
+              >
+                <div class="flex items-center space-x-3">
+                  <div
+                    class="w-12 h-12 health-gradient rounded-lg flex items-center justify-center"
+                  >
+                    <i class="fas fa-users text-white"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-800">
+                      Perfiles Familiares
+                    </h3>
+                    <p class="text-sm text-gray-600">Gestiona salud familiar</p>
+                  </div>
+                </div>
+              </button>
+            </div>
+
+            <!-- Guía Activa -->
+            <div class="bg-gray-50 rounded-xl p-6">
+              <div class="text-center mb-8">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">
+                  Guía: Cómo Agendar Tu Primera Cita
+                </h3>
+                <p class="text-gray-600">
+                  Sigue estos 5 pasos simples para agendar tu primera cita
+                  médica
+                </p>
+              </div>
+
+              <!-- Pasos de la Guía -->
+              <div class="space-y-6">
+                <!-- Paso 1 -->
+                <div class="guide-step active">
+                  <div class="flex items-start space-x-4">
+                    <div
+                      class="w-8 h-8 health-gradient rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                    >
+                      1
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800 mb-2">
+                        Busca Proveedores
+                      </h4>
+                      <p class="text-gray-600">
+                        Utiliza la barra de búsqueda principal para encontrar
+                        proveedores de salud por especialidad, ubicación o
+                        nombre. Puedes aplicar filtros avanzados para refinar
+                        tus resultados.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="guide-step">
+                  <div class="flex items-start space-x-4">
+                    <div
+                      class="w-8 h-8 health-gradient rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                    >
+                      2
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800 mb-2">
+                        Compara Opciones
+                      </h4>
+                      <p class="text-gray-600">
+                        Revisa precios, calificaciones, disponibilidad y
+                        comentarios de otros pacientes. Usa la función de
+                        comparación para evaluar hasta 3 proveedores
+                        simultáneamente.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="guide-step">
+                  <div class="flex items-start space-x-4">
+                    <div
+                      class="w-8 h-8 health-gradient rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                    >
+                      3
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800 mb-2">
+                        Selecciona Horario
+                      </h4>
+                      <p class="text-gray-600">
+                        Elige una fecha y hora disponible que se ajuste a tu
+                        agenda. El sistema muestra la disponibilidad en tiempo
+                        real de cada proveedor.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Paso 4 -->
+                <div class="guide-step">
+                  <div class="flex items-start space-x-4">
+                    <div
+                      class="w-8 h-8 health-gradient rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                    >
+                      4
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800 mb-2">
+                        Confirma Cita
+                      </h4>
+                      <p class="text-gray-600">
+                        Revisa los detalles de tu cita y confirma la reserva.
+                        Recibirás una confirmación inmediata por email y
+                        notificación push.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Paso 5 -->
+                <div class="guide-step">
+                  <div class="flex items-start space-x-4">
+                    <div
+                      class="w-8 h-8 health-gradient rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                    >
+                      5
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800 mb-2">
+                        Asiste a tu Cita
+                      </h4>
+                      <p class="text-gray-600">
+                        Llega puntual a tu cita. Usa la función de navegación
+                        integrada y el botón "Llegué" para optimizar tu
+                        experiencia.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Navegación de la guía -->
+              <div class="flex justify-between mt-8">
+                <button
+                  class="prev-step px-6 py-2 text-gray-600 font-medium rounded-lg border border-gray-300 hover:bg-gray-100"
+                >
+                  <i class="fas fa-arrow-left mr-2"></i>Anterior
+                </button>
+                <button
+                  class="next-step health-gradient text-white px-6 py-2 rounded-lg font-medium shadow hover:shadow-md"
+                >
+                  Siguiente<i class="fas fa-arrow-right ml-2"></i>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Sección: Formulario de Contacto -->
+          <section
+            id="contact-section"
+            class="bg-white rounded-2xl shadow-sm p-6 hidden"
+          >
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">
+              Contactar con Soporte
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+              <!-- Información de Contacto -->
+              <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                  Opciones de Contacto
+                </h3>
+                <div class="space-y-4">
+                  <div
+                    class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl"
+                  >
+                    <div
+                      class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center"
+                    >
+                      <i class="fas fa-comments text-green-600 text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800">Chat en Vivo</h4>
+                      <p class="text-sm text-gray-600">Disponible 24/7</p>
+                      <p class="text-sm text-[#2563EB] font-medium">
+                        Tiempo de espera: < 2 min
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl"
+                  >
+                    <div
+                      class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center"
+                    >
+                      <i class="fas fa-phone-alt text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800">
+                        Línea Telefónica
+                      </h4>
+                      <p class="text-sm text-gray-600">Lun-Vie: 8:00 - 20:00</p>
+                      <p class="text-sm text-[#2563EB] font-medium">
+                        +1 (555) 123-HELP
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl"
+                  >
+                    <div
+                      class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center"
+                    >
+                      <i class="fas fa-envelope text-purple-600 text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800">
+                        Correo Electrónico
+                      </h4>
+                      <p class="text-sm text-gray-600">Respuesta en 24 horas</p>
+                      <p class="text-sm text-[#2563EB] font-medium">
+                        soporte@comparasalud.com
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Información adicional -->
+                <div
+                  class="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200"
+                >
+                  <div class="flex items-start space-x-3">
+                    <i class="fas fa-lightbulb text-blue-600 mt-1"></i>
+                    <div>
+                      <h4 class="font-semibold text-blue-800 mb-1">
+                        ¿Sabías que?
+                      </h4>
+                      <p class="text-sm text-blue-700">
+                        El 85% de las consultas se resuelven mediante nuestro
+                        chat en vivo. ¡Es la forma más rápida de obtener ayuda!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Formulario de Contacto -->
+              <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                  Enviar Mensaje
+                </h3>
+                <form class="space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                      >Asunto</label
+                    >
+                    <select
+                      class="w-full px-4 py-3 bg-white rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent"
+                    >
+                      <option>Selecciona un asunto</option>
+                      <option>Problema con mi cuenta</option>
+                      <option>Problema con una cita</option>
+                      <option>Error en la aplicación</option>
+                      <option>Sugerencia de mejora</option>
+                      <option>Otro</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                      >Descripción</label
+                    >
+                    <textarea
+                      rows="4"
+                      placeholder="Describe tu consulta o problema en detalle..."
+                      class="w-full px-4 py-3 bg-white rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent"
+                    ></textarea>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                      >Adjuntar archivo (opcional)</label
+                    >
+                    <div
+                      class="border-2 border-dashed border-gray-300 rounded-xl p-4 text-center"
+                    >
+                      <i
+                        class="fas fa-cloud-upload-alt text-gray-400 text-2xl mb-2"
+                      ></i>
+                      <p class="text-sm text-gray-600">
+                        Arrastra archivos aquí o haz clic para seleccionar
+                      </p>
+                      <p class="text-xs text-gray-500 mt-1">
+                        Máximo 10MB por archivo
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="urgent"
+                      class="rounded border-gray-300 text-[#2563EB] focus:ring-[#2563EB]"
+                    />
+                    <label for="urgent" class="ml-2 text-sm text-gray-700"
+                      >Marcar como urgente</label
+                    >
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="w-full health-gradient text-white py-3 rounded-xl font-medium shadow hover:shadow-md transition-all"
+                  >
+                    Enviar Mensaje
+                  </button>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+      <div class="container mx-auto px-4 py-8">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-lg font-bold mb-4">ComparaSalud</h3>
+            <p class="text-gray-400 text-sm">
+              Democratizando el acceso a la atención médica mediante
+              transparencia y tecnología.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Enlaces Rápidos</h4>
+            <ul class="space-y-2 text-sm text-gray-400">
+              <li><a href="#" class="hover:text-white">Inicio</a></li>
+              <li>
+                <a href="#" class="hover:text-white">Buscar Proveedores</a>
+              </li>
+              <li><a href="#" class="hover:text-white">Centro de Ayuda</a></li>
+              <li><a href="#" class="hover:text-white">Sobre Nosotros</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Legal</h4>
+            <ul class="space-y-2 text-sm text-gray-400">
+              <li>
+                <a href="#" class="hover:text-white">Términos de Servicio</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white">Política de Privacidad</a>
+              </li>
+              <li><a href="#" class="hover:text-white">Cookies</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Contacto</h4>
+            <div class="space-y-2 text-sm text-gray-400">
+              <p>soporte@comparasalud.com</p>
+              <p>+1 (555) 123-HELP</p>
+              <div class="flex space-x-3 mt-2">
+                <a href="#" class="text-gray-400 hover:text-white"
+                  ><i class="fab fa-facebook-f"></i
+                ></a>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  ><i class="fab fa-linkedin-in"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400"
+        >
+          <p>&copy; 2024 ComparaSalud. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Navegación entre secciones
+        const categoryBtns = document.querySelectorAll(".category-btn");
+        const sections = {
+          "Preguntas Frecuentes": "faq-section",
+          "Guías de Uso": "guides-section",
+          "Contactar Soporte": "contact-section",
+        };
+
+        categoryBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const sectionName = this.querySelector("span").textContent;
+
+            // Remover active de todos los botones
+            categoryBtns.forEach((b) => {
+              b.classList.remove("bg-[#2563EB]", "text-white");
+              b.classList.add("text-gray-700", "hover:bg-gray-100");
+            });
+
+            // Activar botón clickeado
+            this.classList.add("bg-[#2563EB]", "text-white");
+            this.classList.remove("text-gray-700", "hover:bg-gray-100");
+
+            // Ocultar todas las secciones
+            Object.values(sections).forEach((sectionId) => {
+              document.getElementById(sectionId).classList.add("hidden");
+            });
+
+            // Mostrar sección correspondiente
+            if (sections[sectionName]) {
+              document
+                .getElementById(sections[sectionName])
+                .classList.remove("hidden");
+            }
+          });
+        });
+
+        // Funcionalidad FAQ
+        const faqItems = document.querySelectorAll(".faq-item");
+        faqItems.forEach((item) => {
+          const question = item.querySelector(".faq-question");
+          const icon = question.querySelector("i");
+
+          question.addEventListener("click", function () {
+            const isActive = item.classList.contains("active");
+
+            // Cerrar todos los FAQs
+            faqItems.forEach((faq) => {
+              faq.classList.remove("active");
+              faq.querySelector("i").classList.remove("fa-chevron-up");
+              faq.querySelector("i").classList.add("fa-chevron-down");
+            });
+
+            // Abrir FAQ clickeado si no estaba activo
+            if (!isActive) {
+              item.classList.add("active");
+              icon.classList.remove("fa-chevron-down");
+              icon.classList.add("fa-chevron-up");
+            }
+          });
+        });
+
+        // Funcionalidad Guías de Uso
+        const guideSteps = document.querySelectorAll(".guide-step");
+        let currentStep = 0;
+
+        document
+          .querySelector(".next-step")
+          .addEventListener("click", function () {
+            if (currentStep < guideSteps.length - 1) {
+              guideSteps[currentStep].classList.remove("active");
+              currentStep++;
+              guideSteps[currentStep].classList.add("active");
+            }
+          });
+
+        document
+          .querySelector(".prev-step")
+          .addEventListener("click", function () {
+            if (currentStep > 0) {
+              guideSteps[currentStep].classList.remove("active");
+              currentStep--;
+              guideSteps[currentStep].classList.add("active");
+            }
+          });
+
+        // Filtro de categorías FAQ
+        const faqCategories = document.querySelectorAll(".faq-category");
+        faqCategories.forEach((cat) => {
+          cat.addEventListener("click", function () {
+            faqCategories.forEach((c) =>
+              c.classList.remove("bg-[#2563EB]", "text-white")
+            );
+            this.classList.add("bg-[#2563EB]", "text-white");
+            this.classList.remove("bg-gray-200", "text-gray-700");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

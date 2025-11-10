@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividad de la Comunidad - ComparaSalud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .health-gradient {
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+      }
+
+      .health-gradient-text {
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .pulse-community {
+        animation: pulseCommunity 2s infinite;
+      }
+
+      @keyframes pulseCommunity {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.02);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Header/Navbar -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 health-gradient rounded-lg flex items-center justify-center"
+            >
+              <i class="fas fa-users text-white"></i>
+            </div>
+            <h1 class="text-xl font-bold text-gray-800">
+              Actividad de la Comunidad
+            </h1>
+          </div>
+          <div class="flex items-center space-x-4">
+            <button class="p-2 text-gray-500 hover:text-gray-700 rounded-lg">
+              <i class="fas fa-search"></i>
+            </button>
+            <button class="p-2 text-gray-500 hover:text-gray-700 rounded-lg">
+              <i class="fas fa-bell"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+      <!-- Header de la comunidad -->
+      <div class="mb-8 text-center fade-in">
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">
+          Comunidad ComparaSalud
+        </h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Descubre las experiencias, tendencias y preguntas de nuestra comunidad
+          de pacientes
+        </p>
+      </div>
+
+      <!-- Sección: Reseñas Recientes -->
+      <section class="mb-12 fade-in">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-2xl font-bold text-gray-800 flex items-center">
+            <i class="fas fa-star text-yellow-500 mr-3"></i>
+            Reseñas Recientes
+          </h3>
+          <a
+            href="#"
+            class="text-blue-600 hover:text-blue-800 font-medium flex items-center"
+          >
+            Ver todas
+            <i class="fas fa-chevron-right ml-1 text-sm"></i>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Reseña 1 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300 pulse-community"
+          >
+            <div class="p-6">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center space-x-3">
+                  <div
+                    class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"
+                  >
+                    <span class="font-semibold text-blue-600">MR</span>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-800">María Rodríguez</h4>
+                    <div class="flex items-center space-x-1">
+                      <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                      <span class="text-gray-500 text-sm">Hace 2 horas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <h5 class="font-medium text-gray-800 mb-2">
+                  Clínica Dental Sonrisa Perfecta
+                </h5>
+                <p class="text-gray-600 text-sm line-clamp-3">
+                  Excelente atención del Dr. González. Muy profesional y explicó
+                  todo el procedimiento con detalle. Los precios son
+                  transparentes y no hay sorpresas.
+                </p>
+              </div>
+
+              <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center space-x-4 text-gray-500">
+                  <button
+                    class="flex items-center space-x-1 hover:text-blue-600"
+                  >
+                    <i class="far fa-thumbs-up"></i>
+                    <span>12</span>
+                  </button>
+                  <button
+                    class="flex items-center space-x-1 hover:text-blue-600"
+                  >
+                    <i class="far fa-comment"></i>
+                    <span>3</span>
+                  </button>
+                </div>
+                <span
+                  class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-medium"
+                >
+                  Odontología
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reseña 2 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300"
+          >
+            <div class="p-6">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center space-x-3">
+                  <div
+                    class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center"
+                  >
+                    <span class="font-semibold text-green-600">CP</span>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-800">Carlos Pérez</h4>
+                    <div class="flex items-center space-x-1">
+                      <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star text-gray-300"></i>
+                      </div>
+                      <span class="text-gray-500 text-sm">Hace 5 horas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <h5 class="font-medium text-gray-800 mb-2">
+                  Laboratorio Análisis Plus
+                </h5>
+                <p class="text-gray-600 text-sm line-clamp-3">
+                  Resultados rápidos y precios competitivos. El personal muy
+                  amable y las instalaciones limpias. Recomendado para análisis
+                  de rutina.
+                </p>
+              </div>
+
+              <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center space-x-4 text-gray-500">
+                  <button
+                    class="flex items-center space-x-1 hover:text-blue-600"
+                  >
+                    <i class="far fa-thumbs-up"></i>
+                    <span>8</span>
+                  </button>
+                  <button
+                    class="flex items-center space-x-1 hover:text-blue-600"
+                  >
+                    <i class="far fa-comment"></i>
+                    <span>1</span>
+                  </button>
+                </div>
+                <span
+                  class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium"
+                >
+                  Laboratorio
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reseña 3 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300"
+          >
+            <div class="p-6">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex items-center space-x-3">
+                  <div
+                    class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center"
+                  >
+                    <span class="font-semibold text-purple-600">AG</span>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-800">Ana García</h4>
+                    <div class="flex items-center space-x-1">
+                      <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                      </div>
+                      <span class="text-gray-500 text-sm">Ayer</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <h5 class="font-medium text-gray-800 mb-2">
+                  Centro Médico Integral
+                </h5>
+                <p class="text-gray-600 text-sm line-clamp-3">
+                  Buena experiencia en general. La Dra. Martínez fue muy atenta,
+                  aunque la espera fue un poco larga. Los precios son justos
+                  para la calidad del servicio.
+                </p>
+              </div>
+
+              <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center space-x-4 text-gray-500">
+                  <button
+                    class="flex items-center space-x-1 hover:text-blue-600"
+                  >
+                    <i class="far fa-thumbs-up"></i>
+                    <span>15</span>
+                  </button>
+                  <button
+                    class="flex items-center space-x-1 hover:text-blue-600"
+                  >
+                    <i class="far fa-comment"></i>
+                    <span>5</span>
+                  </button>
+                </div>
+                <span
+                  class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-medium"
+                >
+                  Medicina General
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Proveedores Trending -->
+      <section class="mb-12 fade-in">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-2xl font-bold text-gray-800 flex items-center">
+            <i class="fas fa-fire text-orange-500 mr-3"></i>
+            Proveedores Trending
+          </h3>
+          <a
+            href="#"
+            class="text-blue-600 hover:text-blue-800 font-medium flex items-center"
+          >
+            Explorar más
+            <i class="fas fa-chevron-right ml-1 text-sm"></i>
+          </a>
+        </div>
+
+        <div class="relative">
+          <div class="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
+            <!-- Trending 1 -->
+            <div
+              class="flex-shrink-0 w-80 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300"
+            >
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center space-x-3">
+                    <div
+                      class="w-16 h-16 health-gradient rounded-lg flex items-center justify-center"
+                    >
+                      <i class="fas fa-stethoscope text-white text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-gray-800">
+                        Clínica Dental Sonrisa
+                      </h4>
+                      <div class="flex items-center space-x-1">
+                        <div class="flex text-yellow-400 text-sm">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="text-gray-500 text-sm">(128)</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full font-medium flex items-center"
+                  >
+                    <i class="fas fa-trending-up mr-1"></i>
+                    #1
+                  </span>
+                </div>
+
+                <div class="mb-4">
+                  <p class="text-gray-600 text-sm mb-3">
+                    Especialistas en ortodoncia y blanqueamiento dental con
+                    tecnología de última generación.
+                  </p>
+                  <div class="flex items-center text-sm text-gray-500 mb-2">
+                    <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                    <span>2.3 km de ti</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-500">
+                    <i class="fas fa-clock mr-2 text-green-500"></i>
+                    <span>Disponible hoy</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <span class="text-lg font-bold text-gray-800">
+                    Desde S/ 80
+                  </span>
+                  <button
+                    class="health-gradient text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-md transition-all"
+                  >
+                    Ver detalles
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trending 2 -->
+            <div
+              class="flex-shrink-0 w-80 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300"
+            >
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center space-x-3">
+                    <div
+                      class="w-16 h-16 health-gradient rounded-lg flex items-center justify-center"
+                    >
+                      <i class="fas fa-microscope text-white text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-gray-800">
+                        Lab. Diagnóstico Preciso
+                      </h4>
+                      <div class="flex items-center space-x-1">
+                        <div class="flex text-yellow-400 text-sm">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-500 text-sm">(95)</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full font-medium flex items-center"
+                  >
+                    <i class="fas fa-trending-up mr-1"></i>
+                    #2
+                  </span>
+                </div>
+
+                <div class="mb-4">
+                  <p class="text-gray-600 text-sm mb-3">
+                    Resultados confiables en 24 horas. Amplia gama de análisis
+                    clínicos y especializados.
+                  </p>
+                  <div class="flex items-center text-sm text-gray-500 mb-2">
+                    <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                    <span>1.8 km de ti</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-500">
+                    <i class="fas fa-clock mr-2 text-green-500"></i>
+                    <span>Disponible hoy</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <span class="text-lg font-bold text-gray-800">
+                    Desde S/ 45
+                  </span>
+                  <button
+                    class="health-gradient text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-md transition-all"
+                  >
+                    Ver detalles
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trending 3 -->
+            <div
+              class="flex-shrink-0 w-80 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300"
+            >
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center space-x-3">
+                    <div
+                      class="w-16 h-16 health-gradient rounded-lg flex items-center justify-center"
+                    >
+                      <i class="fas fa-heartbeat text-white text-xl"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-gray-800">
+                        Centro Cardiológico Avanzado
+                      </h4>
+                      <div class="flex items-center space-x-1">
+                        <div class="flex text-yellow-400 text-sm">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="far fa-star text-gray-300"></i>
+                        </div>
+                        <span class="text-gray-500 text-sm">(76)</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-medium flex items-center"
+                  >
+                    <i class="fas fa-trending-up mr-1"></i>
+                    #3
+                  </span>
+                </div>
+
+                <div class="mb-4">
+                  <p class="text-gray-600 text-sm mb-3">
+                    Especialistas en cardiología preventiva y estudios cardíacos
+                    no invasivos.
+                  </p>
+                  <div class="flex items-center text-sm text-gray-500 mb-2">
+                    <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                    <span>3.5 km de ti</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-500">
+                    <i class="fas fa-clock mr-2 text-green-500"></i>
+                    <span>Disponible mañana</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <span class="text-lg font-bold text-gray-800">
+                    Desde S/ 120
+                  </span>
+                  <button
+                    class="health-gradient text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-md transition-all"
+                  >
+                    Ver detalles
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Preguntas y Respuestas -->
+      <section class="fade-in">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-2xl font-bold text-gray-800 flex items-center">
+            <i class="fas fa-question-circle text-blue-500 mr-3"></i>
+            Preguntas de la Comunidad
+          </h3>
+          <a
+            href="#"
+            class="text-blue-600 hover:text-blue-800 font-medium flex items-center"
+          >
+            Ver todas
+            <i class="fas fa-chevron-right ml-1 text-sm"></i>
+          </a>
+        </div>
+
+        <div
+          class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden"
+        >
+          <!-- Pregunta 1 -->
+          <div
+            class="border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors duration-200"
+          >
+            <div class="p-6">
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"
+                  >
+                    <i class="fas fa-question text-blue-600"></i>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-start justify-between mb-2">
+                    <h4 class="font-semibold text-gray-800">
+                      ¿Qué documentos debo llevar para una consulta médica por
+                      primera vez?
+                    </h4>
+                    <span class="text-sm text-gray-500 ml-4 whitespace-nowrap"
+                      >Hace 3 horas</span
+                    >
+                  </div>
+                  <p class="text-gray-600 text-sm mb-3">
+                    Es mi primera vez yendo a una consulta privada, ¿qué
+                    documentos debo llevar aparte de mi DNI?
+                  </p>
+
+                  <!-- Respuestas -->
+                  <div class="bg-gray-50 rounded-lg p-4 mb-3">
+                    <div class="flex items-start space-x-3">
+                      <div
+                        class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
+                      >
+                        <i class="fas fa-check text-green-600 text-xs"></i>
+                      </div>
+                      <div>
+                        <div class="flex items-center space-x-2 mb-1">
+                          <span class="font-medium text-gray-800"
+                            >Dr. Martínez</span
+                          >
+                          <span class="text-xs text-gray-500"
+                            >Médico General</span
+                          >
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                          Para primera consulta lleva: DNI, historial médico si
+                          tienes, exámenes recientes y lista de medicamentos que
+                          tomas. Algunas clínicas piden carnet de seguro.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-sm">
+                    <div class="flex items-center space-x-4 text-gray-500">
+                      <button
+                        class="flex items-center space-x-1 hover:text-blue-600"
+                      >
+                        <i class="far fa-thumbs-up"></i>
+                        <span>5</span>
+                      </button>
+                      <button
+                        class="flex items-center space-x-1 hover:text-blue-600"
+                      >
+                        <i class="far fa-comment"></i>
+                        <span>2 respuestas</span>
+                      </button>
+                    </div>
+                    <button
+                      class="text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                      Responder
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta 2 -->
+          <div
+            class="border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors duration-200"
+          >
+            <div class="p-6">
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center"
+                  >
+                    <i class="fas fa-question text-purple-600"></i>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-start justify-between mb-2">
+                    <h4 class="font-semibold text-gray-800">
+                      ¿Cuál es la diferencia entre una consulta general y una
+                      especializada en precios?
+                    </h4>
+                    <span class="text-sm text-gray-500 ml-4 whitespace-nowrap"
+                      >Ayer</span
+                    >
+                  </div>
+                  <p class="text-gray-600 text-sm mb-3">
+                    He visto que las consultas con especialistas son más caras,
+                    ¿vale la pena la diferencia?
+                  </p>
+
+                  <!-- Respuestas -->
+                  <div class="bg-gray-50 rounded-lg p-4 mb-3">
+                    <div class="flex items-start space-x-3">
+                      <div
+                        class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
+                      >
+                        <i class="fas fa-check text-green-600 text-xs"></i>
+                      </div>
+                      <div>
+                        <div class="flex items-center space-x-2 mb-1">
+                          <span class="font-medium text-gray-800"
+                            >Laura S.</span
+                          >
+                          <span class="text-xs text-gray-500"
+                            >Paciente frecuente</span
+                          >
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                          Depende de tu caso. Para temas simples, un médico
+                          general es suficiente. Si es algo específico o
+                          complejo, el especialista tiene más entrenamiento en
+                          ese área. En mi experiencia, vale la pena.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-sm">
+                    <div class="flex items-center space-x-4 text-gray-500">
+                      <button
+                        class="flex items-center space-x-1 hover:text-blue-600"
+                      >
+                        <i class="far fa-thumbs-up"></i>
+                        <span>8</span>
+                      </button>
+                      <button
+                        class="flex items-center space-x-1 hover:text-blue-600"
+                      >
+                        <i class="far fa-comment"></i>
+                        <span>3 respuestas</span>
+                      </button>
+                    </div>
+                    <button
+                      class="text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                      Responder
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta 3 -->
+          <div
+            class="border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors duration-200"
+          >
+            <div class="p-6">
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center"
+                  >
+                    <i class="fas fa-question text-orange-600"></i>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-start justify-between mb-2">
+                    <h4 class="font-semibold text-gray-800">
+                      ¿Es posible cancelar una cita sin costo si aviso con
+                      anticipación?
+                    </h4>
+                    <span class="text-sm text-gray-500 ml-4 whitespace-nowrap"
+                      >Hace 2 días</span
+                    >
+                  </div>
+                  <p class="text-gray-600 text-sm mb-3">
+                    Tengo una emergencia y no podré asistir a mi cita de mañana,
+                    ¿me cobrarán igual?
+                  </p>
+
+                  <!-- Respuestas -->
+                  <div class="bg-gray-50 rounded-lg p-4 mb-3">
+                    <div class="flex items-start space-x-3">
+                      <div
+                        class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
+                      >
+                        <i class="fas fa-check text-green-600 text-xs"></i>
+                      </div>
+                      <div>
+                        <div class="flex items-center space-x-2 mb-1">
+                          <span class="font-medium text-gray-800"
+                            >Clínica Central</span
+                          >
+                          <span class="text-xs text-gray-500"
+                            >Proveedor verificado</span
+                          >
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                          En la mayoría de clínicas, si cancelas con 24 horas de
+                          anticipación no hay cargo. Algunos lugares son más
+                          flexibles con emergencias. Te recomendamos llamar
+                          directamente para explicar tu situación.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-sm">
+                    <div class="flex items-center space-x-4 text-gray-500">
+                      <button
+                        class="flex items-center space-x-1 hover:text-blue-600"
+                      >
+                        <i class="far fa-thumbs-up"></i>
+                        <span>12</span>
+                      </button>
+                      <button
+                        class="flex items-center space-x-1 hover:text-blue-600"
+                      >
+                        <i class="far fa-comment"></i>
+                        <span>4 respuestas</span>
+                      </button>
+                    </div>
+                    <button
+                      class="text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                      Responder
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="mt-12 text-center fade-in">
+        <div class="health-gradient rounded-2xl p-8 text-white">
+          <h3 class="text-2xl font-bold mb-3">¿Tienes alguna pregunta?</h3>
+          <p class="mb-6 opacity-90 max-w-md mx-auto">
+            Únete a la comunidad y comparte tus experiencias o haz preguntas a
+            otros pacientes
+          </p>
+          <div
+            class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4"
+          >
+            <button
+              class="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg hover:shadow-lg transition-all"
+            >
+              Hacer una pregunta
+            </button>
+            <button
+              class="border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition-all"
+            >
+              Escribir una reseña
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+      <div class="container mx-auto px-4 py-8">
+        <div class="text-center">
+          <p>&copy; 2024 ComparaSalud. Todos los derechos reservados.</p>
+          <p class="text-gray-400 text-sm mt-2">
+            Juntos construimos una comunidad más saludable e informada
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Animación de entrada para las secciones
+        const sections = document.querySelectorAll(".fade-in");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = "running";
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        sections.forEach((section) => {
+          section.style.animationPlayState = "paused";
+          observer.observe(section);
+        });
+
+        // Interacción para los botones de like
+        document.querySelectorAll(".fa-thumbs-up").forEach((icon) => {
+          icon.addEventListener("click", function () {
+            const parent = this.closest("button");
+            const countSpan = parent.querySelector("span");
+            let count = parseInt(countSpan.textContent);
+
+            if (this.classList.contains("far")) {
+              this.classList.remove("far");
+              this.classList.add("fas", "text-blue-600");
+              countSpan.textContent = count + 1;
+            } else {
+              this.classList.remove("fas", "text-blue-600");
+              this.classList.add("far");
+              countSpan.textContent = count - 1;
+            }
+          });
+        });
+
+        // Smooth scroll para los enlaces "Ver todos"
+        document.querySelectorAll('a[href="#"]').forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            // En una aplicación real, aquí navegaríamos a la página correspondiente
+            alert(
+              "En una aplicación real, esto navegaría a la página correspondiente"
+            );
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
