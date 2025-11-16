@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../assets/logo.ico" type="image/x-icon" />
+    <title>Mis Citas - ComparaSalud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .health-gradient {
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+      }
+      .appointment-card {
+        transition: all 0.3s ease;
+      }
+      .appointment-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+      }
+      .status-badge {
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .status-confirmed {
+        background-color: #dcfce7;
+        color: #166534;
+      }
+      .status-pending {
+        background-color: #fef3c7;
+        color: #92400e;
+      }
+      .status-cancelled {
+        background-color: #fee2e2;
+        color: #991b1b;
+      }
+      .status-completed {
+        background-color: #dbeafe;
+        color: #1e40af;
+      }
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+      .tab-button.active {
+        border-bottom: 2px solid #2563eb;
+        color: #2563eb;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Header Principal -->
+    <header class="bg-white sticky top-0 z-50">
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <a href="3_user_dashboard.html" class="flex items-center space-x-3">
+            <img
+              src="../assets/img/logo.png"
+              alt="ComparaSalud"
+              class="w-10 h-10"
+            />
+            <span class="text-xl font-bold text-gray-900">ComparaSalud</span>
+          </a>
+
+          <!-- Barra de Búsqueda - Desktop -->
+          <div class="hidden lg:block flex-1 max-w-2xl mx-8">
+            <div class="relative search-focus">
+              <input
+                type="text"
+                placeholder="Buscar médicos, especialidades, servicios..."
+                class="w-full pl-12 pr-4 py-3 bg-gray-100 rounded-xl border border-gray-200 focus:outline-none focus:border-[#2563EB] transition-colors"
+              />
+              <i
+                class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+              ></i>
+              <button
+                class="absolute right-2 top-1/2 transform -translate-y-1/2 health-gradient text-white px-4 py-1.5 rounded-lg text-sm font-medium"
+              >
+                Buscar
+              </button>
+            </div>
+          </div>
+
+          <!-- Iconos de Acceso Rápido -->
+          <div class="flex items-center space-x-4">
+            <!-- Favoritos -->
+            <button
+              onclick="window.location.href='6_favorites.html'"
+              class="relative text-gray-600 p-2 rounded-lg hover:bg-gray-100"
+            >
+              <i class="far fa-heart text-lg"></i>
+              <span
+                class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+                >3</span
+              >
+            </button>
+
+            <!-- Notificaciones -->
+            <button
+              class="relative text-gray-600 p-2 rounded-lg hover:bg-gray-100"
+            >
+              <i class="far fa-bell text-lg"></i>
+              <span
+                class="absolute -top-1 -right-1 w-5 h-5 bg-yellow-500 text-white text-xs rounded-full flex items-center justify-center"
+                >5</span
+              >
+            </button>
+
+            <!-- Perfil -->
+            <div class="relative group">
+              <button
+                class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100"
+              >
+                <img
+                  src="../assets/img/usuarios/usuario9.png"
+                  alt="Juan Sánchez"
+                  class="w-10 h-10 rounded-full"
+                />
+                <span class="hidden md:block text-gray-700 font-medium"
+                  >Juan Sánchez</span
+                >
+                <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+              </button>
+
+              <!-- Menú desplegable del perfil -->
+              <div
+                class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+              >
+                <a
+                  href="6_user_profile.html"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-50"
+                >
+                  <i class="far fa-user mr-3"></i>Mi Perfil
+                </a>
+                <a
+                  href="5_appointment_list.html"
+                  class="block lg:hidden px-4 py-2 text-gray-700 hover:bg-gray-50"
+                >
+                  <i class="far fa-calendar-check mr-3"></i>Mis Citas
+                </a>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-50"
+                >
+                  <i class="fas fa-cog mr-3"></i>Configuración
+                </a>
+                <a
+                  href="8_help_center.html"
+                  class="block lg:hidden px-4 py-2 text-gray-700 hover:bg-gray-50"
+                >
+                  <i class="fa-solid fa-life-ring mr-3"></i>Ayuda
+                </a>
+                <div class="border-t border-gray-200 my-2"></div>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-50"
+                >
+                  <i class="fas fa-sign-out-alt mr-3"></i>Cerrar Sesión
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de Búsqueda - Mobile Expandida -->
+        <div class="lg:hidden mt-3 search-focus">
+          <div class="relative">
+            <input
+              type="text"
+              placeholder="Buscar médicos, especialidades, servicios..."
+              class="w-full pl-12 pr-4 py-3 bg-gray-100 rounded-xl border border-gray-200 focus:outline-none focus:border-[#2563EB] transition-colors"
+            />
+            <i
+              class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+            ></i>
+            <button
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 health-gradient text-white px-4 py-1.5 rounded-lg text-sm font-medium"
+            >
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+      <div class="max-w-6xl mx-auto">
+        <!-- Page Header -->
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">Mis Citas</h1>
+          <p class="text-gray-600">
+            Gestiona tus citas médicas y revisa tu historial
+          </p>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="bg-white rounded-lg shadow-sm mb-8">
+          <div class="flex border-b">
+            <button
+              class="tab-button active px-6 py-4 font-medium text-gray-700 hover:text-blue-600 transition-colors"
+              data-tab="upcoming"
+            >
+              <i class="fas fa-calendar-check mr-2"></i>Próximas Citas
+            </button>
+            <button
+              class="tab-button px-6 py-4 font-medium text-gray-700 hover:text-blue-600 transition-colors"
+              data-tab="past"
+            >
+              <i class="fas fa-history mr-2"></i>Historial
+            </button>
+            <button
+              class="tab-button px-6 py-4 font-medium text-gray-700 hover:text-blue-600 transition-colors"
+              data-tab="cancelled"
+            >
+              <i class="fas fa-times-circle mr-2"></i>Canceladas
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="space-y-6">
+          <!-- Upcoming Appointments -->
+          <div class="tab-content active" id="upcoming">
+            <div class="space-y-4">
+              <!-- Appointment 1 -->
+              <div class="appointment-card bg-white rounded-lg shadow-sm p-6">
+                <div
+                  class="flex flex-col sm:flex-row justify-between items-start gap-4"
+                >
+                  <div class="flex gap-4">
+                    <img
+                      src="../assets/img/doctores/doctor5.png"
+                      alt="Dr. García"
+                      class="w-32 h-32 rounded-full"
+                    />
+                    <div>
+                      <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-semibold text-gray-900">
+                          Dr. Carlos García Mendoza
+                        </h3>
+                        <span class="status-badge status-confirmed"
+                          >Confirmada</span
+                        >
+                      </div>
+                      <p class="text-blue-600 font-medium mb-2">Cardiólogo</p>
+                      <div class="space-y-1 text-sm text-gray-600">
+                        <p>
+                          <i class="fas fa-calendar mr-2"></i>Miércoles, 4 de
+                          diciembre de 2024
+                        </p>
+                        <p>
+                          <i class="fas fa-clock mr-2"></i>11:00 AM - 11:45 AM
+                        </p>
+                        <p>
+                          <i class="fas fa-map-marker-alt mr-2"></i>Av. Javier
+                          Prado 1234, Miraflores
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <button
+                      class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                    >
+                      <i class="fas fa-video mr-2"></i>Video consulta
+                    </button>
+                    <button
+                      class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+                    >
+                      <i class="fas fa-times mr-2"></i>Cancelar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Appointment 2 -->
+              <div class="appointment-card bg-white rounded-lg shadow-sm p-6">
+                <div
+                  class="flex flex-col sm:flex-row justify-between items-start gap-4"
+                >
+                  <div class="flex gap-4">
+                    <img
+                      src="../assets/img/doctores/doctor6.png"
+                      alt="Dra. López"
+                      class="w-32 h-32 rounded-full"
+                    />
+                    <div>
+                      <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-semibold text-gray-900">
+                          Dra. Ana López Rodríguez
+                        </h3>
+                        <span class="status-badge status-pending"
+                          >Pendiente</span
+                        >
+                      </div>
+                      <p class="text-blue-600 font-medium mb-2">Dermatóloga</p>
+                      <div class="space-y-1 text-sm text-gray-600">
+                        <p>
+                          <i class="fas fa-calendar mr-2"></i>Viernes, 6 de
+                          diciembre de 2024
+                        </p>
+                        <p>
+                          <i class="fas fa-clock mr-2"></i>3:00 PM - 3:30 PM
+                        </p>
+                        <p>
+                          <i class="fas fa-map-marker-alt mr-2"></i>Av.
+                          Salaverry 567, San Isidro
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <button
+                      class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm"
+                    >
+                      <i class="fas fa-check mr-2"></i>Confirmar
+                    </button>
+                    <button
+                      class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+                    >
+                      <i class="fas fa-times mr-2"></i>Cancelar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Appointment 3 -->
+              <div class="appointment-card bg-white rounded-lg shadow-sm p-6">
+                <div
+                  class="flex flex-col sm:flex-row justify-between items-start gap-4"
+                >
+                  <div class="flex gap-4">
+                    <img
+                      src="../assets/img/doctores/doctor4.png"
+                      alt="Dr. Martínez"
+                      class="w-32 h-32 rounded-full"
+                    />
+                    <div>
+                      <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-semibold text-gray-900">
+                          Dr. Roberto Martínez
+                        </h3>
+                        <span class="status-badge status-confirmed"
+                          >Confirmada</span
+                        >
+                      </div>
+                      <p class="text-blue-600 font-medium mb-2">Neurólogo</p>
+                      <div class="space-y-1 text-sm text-gray-600">
+                        <p>
+                          <i class="fas fa-calendar mr-2"></i>Lunes, 9 de
+                          diciembre de 2024
+                        </p>
+                        <p>
+                          <i class="fas fa-clock mr-2"></i>10:00 AM - 10:30 AM
+                        </p>
+                        <p>
+                          <i class="fas fa-map-marker-alt mr-2"></i>Clínica
+                          Angloamericana, La Molina
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <button
+                      class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                    >
+                      <i class="fas fa-video mr-2"></i>Video consulta
+                    </button>
+                    <button
+                      class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+                    >
+                      <i class="fas fa-times mr-2"></i>Cancelar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Past Appointments -->
+          <div class="tab-content" id="past">
+            <div class="space-y-4">
+              <!-- Past Appointment 1 -->
+              <div class="appointment-card bg-white rounded-lg shadow-sm p-6">
+                <div
+                  class="flex flex-col sm:flex-row justify-between items-start gap-4"
+                >
+                  <div class="flex gap-4">
+                    <img
+                      src="../assets/img/doctores/doctor1.png"
+                      alt="Dr. Rodríguez"
+                      class="w-32 h-32 rounded-full"
+                    />
+                    <div>
+                      <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-semibold text-gray-900">
+                          Dr. Manuel Rodríguez
+                        </h3>
+                        <span class="status-badge status-completed"
+                          >Completada</span
+                        >
+                      </div>
+                      <p class="text-blue-600 font-medium mb-2">
+                        Médico General
+                      </p>
+                      <div class="space-y-1 text-sm text-gray-600">
+                        <p>
+                          <i class="fas fa-calendar mr-2"></i>Jueves, 14 de
+                          noviembre de 2024
+                        </p>
+                        <p>
+                          <i class="fas fa-clock mr-2"></i>9:00 AM - 9:30 AM
+                        </p>
+                        <p>
+                          <i class="fas fa-map-marker-alt mr-2"></i>Clínica San
+                          Felipe, Miraflores
+                        </p>
+                      </div>
+                      <div class="mt-2">
+                        <span
+                          class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs"
+                          >Excelente atención</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <button
+                      class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                    >
+                      <i class="fas fa-file-medical mr-2"></i>Ver resumen
+                    </button>
+                    <button
+                      class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+                    >
+                      <i class="fas fa-redo mr-2"></i>Reagendar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Past Appointment 2 -->
+              <div class="appointment-card bg-white rounded-lg shadow-sm p-6">
+                <div
+                  class="flex flex-col sm:flex-row justify-between items-start gap-4"
+                >
+                  <div class="flex gap-4">
+                    <img
+                      src="../assets/img/doctores/doctor2.png"
+                      alt="Dra. Sánchez"
+                      class="w-32 h-32 rounded-full"
+                    />
+                    <div>
+                      <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-semibold text-gray-900">
+                          Dra. Laura Sánchez
+                        </h3>
+                        <span class="status-badge status-completed"
+                          >Completada</span
+                        >
+                      </div>
+                      <p class="text-blue-600 font-medium mb-2">Ginecóloga</p>
+                      <div class="space-y-1 text-sm text-gray-600">
+                        <p>
+                          <i class="fas fa-calendar mr-2"></i>Martes, 5 de
+                          noviembre de 2024
+                        </p>
+                        <p>
+                          <i class="fas fa-clock mr-2"></i>4:00 PM - 4:30 PM
+                        </p>
+                        <p>
+                          <i class="fas fa-map-marker-alt mr-2"></i>Hospital
+                          Nacional, Pueblo Libre
+                        </p>
+                      </div>
+                      <div class="mt-2">
+                        <span
+                          class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs"
+                          >Revisión anual</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <button
+                      class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                    >
+                      <i class="fas fa-file-medical mr-2"></i>Ver resumen
+                    </button>
+                    <button
+                      class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+                    >
+                      <i class="fas fa-redo mr-2"></i>Reagendar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cancelled Appointments -->
+          <div class="tab-content" id="cancelled">
+            <div class="bg-white rounded-lg shadow-sm p-8 text-center">
+              <div
+                class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i class="fas fa-calendar-times text-gray-400 text-2xl"></i>
+              </div>
+              <h3 class="text-lg font-medium text-gray-900 mb-2">
+                No hay citas canceladas
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Todas tus citas han sido completadas o están programadas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-8" id="footer"></footer>
+
+    <script src="../js/components/footer.js"></script>
+    <script>
+      // Tab functionality
+      document.querySelectorAll(".tab-button").forEach((button) => {
+        button.addEventListener("click", function () {
+          const tabId = this.getAttribute("data-tab");
+
+          // Remove active class from all tabs and contents
+          document
+            .querySelectorAll(".tab-button")
+            .forEach((btn) => btn.classList.remove("active"));
+          document
+            .querySelectorAll(".tab-content")
+            .forEach((content) => content.classList.remove("active"));
+
+          // Add active class to clicked tab and corresponding content
+          this.classList.add("active");
+          document.getElementById(tabId).classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>

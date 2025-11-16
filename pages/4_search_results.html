@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../assets/logo.ico" type="image/x-icon" />
+    <title>Resultados de Búsqueda - ComparaSalud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .health-gradient {
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+      }
+      .health-gradient-text {
+        background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .filter-section {
+        transition: all 0.3s ease;
+      }
+      .filter-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      .filter-section.active .filter-content {
+        max-height: 500px;
+      }
+      .star-rating {
+        color: #fbbf24;
+      }
+      .availability-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 6px;
+      }
+      .available {
+        background-color: #10b981;
+      }
+      .limited {
+        background-color: #f59e0b;
+      }
+      .unavailable {
+        background-color: #ef4444;
+      }
+      .result-card {
+        transition: all 0.3s ease;
+      }
+      .result-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+      }
+      @media (max-width: 768px) {
+        .mobile-filter-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 40;
+          display: none;
+        }
+        .mobile-filter-panel {
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 85%;
+          max-width: 320px;
+          background: white;
+          z-index: 50;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+          overflow-y: auto;
+        }
+        .mobile-filter-panel.active {
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Header Principal -->
+    <header class="bg-white sticky top-0 z-50">
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+            <a href="3_user_dashboard.html" class="flex items-center space-x-3">
+              <img
+                src="../assets/img/logo.png"
+                alt="ComparaSalud"
+                class="w-10 h-10"
+              />
+              <span class="text-xl font-bold text-gray-900">ComparaSalud</span>
+            </a>
+
+          <!-- Barra de Búsqueda - Desktop -->
+          <div class="hidden lg:block flex-1 max-w-2xl mx-8">
+            <div class="relative search-focus">
+              <input
+                type="text"
+                placeholder="Buscar médicos, especialidades, servicios..."
+                class="w-full pl-12 pr-4 py-3 bg-gray-100 rounded-xl border border-gray-200 focus:outline-none focus:border-[#2563EB] transition-colors"
+              />
+              <i
+                class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+              ></i>
+              <button
+                class="absolute right-2 top-1/2 transform -translate-y-1/2 health-gradient text-white px-4 py-1.5 rounded-lg text-sm font-medium"
+              >
+                Buscar
+              </button>
+            </div>
+          </div>
+
+          <!-- Iconos de Acceso Rápido -->
+          <div class="flex items-center space-x-4">
+            <!-- Favoritos -->
+            <button
+              onclick="window.location.href='6_favorites.html'"
+              class="relative text-gray-600 p-2 rounded-lg hover:bg-gray-100"
+            >
+              <i class="far fa-heart text-lg"></i>
+              <span
+                class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+                >3</span
+              >
+            </button>
+
+            <!-- Notificaciones -->
+            <button
+              class="relative text-gray-600 p-2 rounded-lg hover:bg-gray-100"
+            >
+              <i class="far fa-bell text-lg"></i>
+              <span
+                class="absolute -top-1 -right-1 w-5 h-5 bg-yellow-500 text-white text-xs rounded-full flex items-center justify-center"
+                >5</span
+              >
+            </button>
+
+            <!-- Perfil -->
+            <div class="relative group">
+              <button
+                class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100"
+              >
+                <img
+                  src="../assets/img/usuarios/usuario9.png"
+                  alt="Juan Sánchez"
+                  class="w-10 h-10 rounded-full"
+                />
+                <span class="hidden md:block text-gray-700 font-medium"
+                  >Juan Sánchez</span
+                >
+                <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+              </button>
+
+              <!-- Menú desplegable del perfil -->
+              <div
+                class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+              >
+                <a
+                  href="6_user_profile.html"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-50"
+                >
+                  <i class="far fa-user mr-3"></i>Mi Perfil
+                </a>
+                <a
+                  href="5_appointment_list.html"
+                  class="block lg:hidden px-4 py-2 text-gray-700 hover:bg-gray-50"
+                >
+                  <i class="far fa-calendar-check mr-3"></i>Mis Citas
+                </a>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-50"
+                >
+                  <i class="fas fa-cog mr-3"></i>Configuración
+                </a>
+                <a
+                  href="8_help_center.html"
+                  class="block lg:hidden px-4 py-2 text-gray-700 hover:bg-gray-50"
+                >
+                  <i class="fa-solid fa-life-ring mr-3"></i>Ayuda
+                </a>
+                <div class="border-t border-gray-200 my-2"></div>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-50"
+                >
+                  <i class="fas fa-sign-out-alt mr-3"></i>Cerrar Sesión
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de Búsqueda - Mobile Expandida -->
+        <div class="lg:hidden mt-3 search-focus">
+          <div class="relative">
+            <input
+              type="text"
+              placeholder="Buscar médicos, especialidades, servicios..."
+              class="w-full pl-12 pr-4 py-3 bg-gray-100 rounded-xl border border-gray-200 focus:outline-none focus:border-[#2563EB] transition-colors"
+            />
+            <i
+              class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+            ></i>
+            <button
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 health-gradient text-white px-4 py-1.5 rounded-lg text-sm font-medium"
+            >
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="container mx-auto px-4 py-6">
+      <!-- Barra de navegación y resultados -->
+      <div class="mb-6">
+        <div
+          class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+        >
+          <div>
+            <h1 class="text-2xl font-bold text-gray-900 mb-2">
+              Resultados de Búsqueda
+            </h1>
+            <p class="text-gray-600">
+              Se encontraron
+              <span class="font-semibold text-blue-600">24</span> resultados
+              para "Cardiólogo en Lima"
+            </p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <button
+              id="mobile-filter-toggle"
+              class="lg:hidden bg-blue-600 text-white px-4 py-2 rounded-lg"
+            >
+              <i class="fas fa-filter mr-2"></i>Filtros
+            </button>
+            <select
+              class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Ordenar por"
+            >
+              <option selected>Relevancia</option>
+              <option>Precio: Menor a Mayor</option>
+              <option>Precio: Mayor a Menor</option>
+              <option>Calificación</option>
+              <option>Disponibilidad</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col lg:flex-row gap-6">
+        <!-- Panel de Filtros -->
+        <div class="lg:w-1/4">
+          <div class="bg-white rounded-lg shadow-sm p-6 hidden lg:block">
+            <h3 class="font-semibold text-gray-800 mb-4">Filtros</h3>
+
+            <!-- Ubicación -->
+            <div class="mb-6">
+              <h4 class="font-medium text-gray-700 mb-3">Ubicación</h4>
+              <select
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option>Lima - Todos los distritos</option>
+                <option>Miraflores</option>
+                <option>San Isidro</option>
+                <option>La Molina</option>
+              </select>
+            </div>
+
+            <!-- Precio -->
+            <div class="mb-6">
+              <h4 class="font-medium text-gray-700 mb-3">Rango de Precio</h4>
+              <div class="space-y-2">
+                <input
+                  type="range"
+                  min="50"
+                  max="500"
+                  value="200"
+                  class="w-full accent-blue-600"
+                />
+                <div class="flex justify-between text-sm text-gray-600">
+                  <span>S/ 50</span>
+                  <span>S/ 500</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Especialidad -->
+            <div class="mb-6">
+              <h4 class="font-medium text-gray-700 mb-3">Especialidad</h4>
+              <div class="space-y-2">
+                <label class="flex items-center"
+                  ><input
+                    type="checkbox"
+                    class="mr-2 accent-blue-600"
+                    checked
+                  />
+                  Cardiología</label
+                >
+                <label class="flex items-center"
+                  ><input type="checkbox" class="mr-2 accent-blue-600" />
+                  Dermatología</label
+                >
+                <label class="flex items-center"
+                  ><input type="checkbox" class="mr-2 accent-blue-600" />
+                  Neurología</label
+                >
+              </div>
+            </div>
+
+            <!-- Disponibilidad -->
+            <div class="mb-6">
+              <h4 class="font-medium text-gray-700 mb-3">Disponibilidad</h4>
+              <div class="space-y-2">
+                <label class="flex items-center"
+                  ><input
+                    type="radio"
+                    name="availability"
+                    class="mr-2 accent-blue-600"
+                    checked
+                  />
+                  Cualquier fecha</label
+                >
+                <label class="flex items-center"
+                  ><input
+                    type="radio"
+                    name="availability"
+                    class="mr-2 accent-blue-600"
+                  />
+                  Esta semana</label
+                >
+                <label class="flex items-center"
+                  ><input
+                    type="radio"
+                    name="availability"
+                    class="mr-2 accent-blue-600"
+                  />
+                  Este mes</label
+                >
+              </div>
+            </div>
+
+            <button
+              class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Aplicar Filtros
+            </button>
+          </div>
+        </div>
+
+        <!-- Resultados -->
+        <div class="lg:w-3/4">
+          <div class="space-y-4">
+            <!-- Resultado 1 -->
+            <div class="result-card bg-white rounded-lg shadow-sm p-6">
+              <div class="flex flex-col sm:flex-row gap-4">
+                <img
+                  src="../assets/img/doctores/doctor1.png"
+                  alt="Dr. García"
+                  class="w-20 h-20 rounded-full"
+                />
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 class="text-lg font-semibold text-gray-900">
+                        Dr. Carlos García Mendoza
+                      </h3>
+                      <p class="text-blue-600 font-medium">
+                        Cardiólogo • 15 años de experiencia
+                      </p>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-2xl font-bold text-green-600">
+                        S/ 150
+                      </div>
+                      <div class="text-sm text-gray-500">por consulta</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center mb-2">
+                    <div class="flex items-center mr-4">
+                      <div class="star-rating mr-1">
+                        <i class="fas fa-star"></i>
+                      </div>
+                      <span class="font-medium">4.8</span>
+                      <span class="text-gray-500 ml-1">(124 reseñas)</span>
+                    </div>
+                    <span class="availability-dot available"></span>
+                    <span class="text-green-600 text-sm"
+                      >Disponible esta semana</span
+                    >
+                  </div>
+                  <p class="text-gray-600 mb-3">
+                    Especialista en cardiología intervencionista con amplia
+                    experiencia en tratamiento de enfermedades cardiovasculares.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span
+                      class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                      >ECG</span
+                    >
+                    <span
+                      class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                      >Ecocardiograma</span
+                    >
+                    <span
+                      class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                      >Prueba de esfuerzo</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="text-sm text-gray-500">
+                      <i class="fas fa-map-marker-alt mr-1"></i>Miraflores • 2.5
+                      km
+                    </div>
+                    <div class="flex space-x-2">
+                      <button
+                        class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50"
+                      >
+                        <i class="far fa-heart"></i>
+                      </button>
+                      <a
+                        href="5_appointment_booking.html"
+                        class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                        >Agendar Cita</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resultado 2 -->
+            <div class="result-card bg-white rounded-lg shadow-sm p-6">
+              <div class="flex flex-col sm:flex-row gap-4">
+                <img
+                  src="../assets/img/doctores/doctor2.png"
+                  alt="Dra. López"
+                  class="w-20 h-20 rounded-full"
+                />
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 class="text-lg font-semibold text-gray-900">
+                        Dra. Ana López Rodríguez
+                      </h3>
+                      <p class="text-blue-600 font-medium">
+                        Cardiólogo • 12 años de experiencia
+                      </p>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-2xl font-bold text-green-600">
+                        S/ 180
+                      </div>
+                      <div class="text-sm text-gray-500">por consulta</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center mb-2">
+                    <div class="flex items-center mr-4">
+                      <div class="star-rating mr-1">
+                        <i class="fas fa-star"></i>
+                      </div>
+                      <span class="font-medium">4.9</span>
+                      <span class="text-gray-500 ml-1">(89 reseñas)</span>
+                    </div>
+                    <span class="availability-dot limited"></span>
+                    <span class="text-yellow-600 text-sm"
+                      >Disponibilidad limitada</span
+                    >
+                  </div>
+                  <p class="text-gray-600 mb-3">
+                    Experta en cardiología preventiva y rehabilitación cardíaca.
+                    Miembro de la Sociedad Peruana de Cardiología.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span
+                      class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                      >Holter</span
+                    >
+                    <span
+                      class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                      >MAPA</span
+                    >
+                    <span
+                      class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                      >Consulta preventiva</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="text-sm text-gray-500">
+                      <i class="fas fa-map-marker-alt mr-1"></i>San Isidro • 5.2
+                      km
+                    </div>
+                    <div class="flex space-x-2">
+                      <button
+                        class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50"
+                      >
+                        <i class="far fa-heart"></i>
+                      </button>
+                      <a
+                        href="5_appointment_booking.html"
+                        class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                        >Agendar Cita</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resultado 3 -->
+            <div class="result-card bg-white rounded-lg shadow-sm p-6">
+              <div class="flex flex-col sm:flex-row gap-4">
+                <img
+                  src="../assets/img/doctores/doctor4.png"
+                  alt="Dr. Martínez"
+                  class="w-20 h-20 rounded-full"
+                />
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 class="text-lg font-semibold text-gray-900">
+                        Dr. Roberto Martínez Sánchez
+                      </h3>
+                      <p class="text-blue-600 font-medium">
+                        Cardiólogo • 20 años de experiencia
+                      </p>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-2xl font-bold text-green-600">
+                        S/ 220
+                      </div>
+                      <div class="text-sm text-gray-500">por consulta</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center mb-2">
+                    <div class="flex items-center mr-4">
+                      <div class="star-rating mr-1">
+                        <i class="fas fa-star"></i>
+                      </div>
+                      <span class="font-medium">4.7</span>
+                      <span class="text-gray-500 ml-1">(156 reseñas)</span>
+                    </div>
+                    <span class="availability-dot available"></span>
+                    <span class="text-green-600 text-sm"
+                      >Disponible esta semana</span
+                    >
+                  </div>
+                  <p class="text-gray-600 mb-3">
+                    Cardiólogo intervencionista con especialización en
+                    cateterismo cardíaco y angioplastia coronaria.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span
+                      class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                      >Cateterismo</span
+                    >
+                    <span
+                      class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                      >Angioplastia</span
+                    >
+                    <span
+                      class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
+                      >Consulta especializada</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="text-sm text-gray-500">
+                      <i class="fas fa-map-marker-alt mr-1"></i>La Molina • 8.1
+                      km
+                    </div>
+                    <div class="flex space-x-2">
+                      <button
+                        class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50"
+                      >
+                        <i class="far fa-heart"></i>
+                      </button>
+                      <a
+                        href="5_appointment_booking.html"
+                        class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                        >Agendar Cita</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paginación -->
+          <div class="flex justify-center mt-8">
+            <nav class="flex space-x-2">
+              <button class="px-3 py-2 text-gray-500 hover:text-blue-600">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="px-3 py-2 bg-blue-600 text-white rounded-lg">
+                1
+              </button>
+              <button
+                class="px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+              >
+                2
+              </button>
+              <button
+                class="px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+              >
+                3
+              </button>
+              <button
+                class="px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+              >
+                4
+              </button>
+              <button class="px-3 py-2 text-gray-500 hover:text-blue-600">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-8" id="footer"></footer>
+
+    <script src="../js/components/footer.js"></script>
+    <script>
+      // Mobile filter toggle
+      document
+        .getElementById("mobile-filter-toggle")
+        .addEventListener("click", function () {
+          document.querySelector(".mobile-filter-overlay").style.display =
+            "block";
+          document
+            .querySelector(".mobile-filter-panel")
+            .classList.add("active");
+        });
+    </script>
+  </body>
+</html>
